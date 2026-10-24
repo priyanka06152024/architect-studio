@@ -179,7 +179,7 @@ body {
 
 .image-zoom:hover > div {
   transform: translateY(-5px);
-  background-color: rgba(245, 242, 235, 0.97);
+
 }
 
 .image-zoom > div > span {
