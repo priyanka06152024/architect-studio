@@ -1,5 +1,42 @@
-import { useState } from 'react'
-import { PageIntro, ProjectCard, CTASection } from '../components/Shared'
-import { projects } from '../data/content'
-const filters=['All','Residential','Commercial','Interior']
-export default function Gallery(){const [filter,setFilter]=useState('All');const list=filter==='All'?projects:projects.filter(p=>p.type===filter);return <><PageIntro eyebrow="Selected work" title={<>A collection of spaces, ideas and <span className="italic text-[#9b815b]">possibilities.</span></>} description="Explore a selection of architectural and interior design references. Replace these sample images with verified photographs of the firm's completed projects."/><section className="container-shell pb-20"><div className="mb-8 flex flex-wrap gap-2">{filters.map(f=><button key={f} onClick={()=>setFilter(f)} className={`border px-4 py-2 text-xs transition ${filter===f?'border-[#252724] bg-[#252724] text-white':'border-[var(--line)] hover:border-[#252724]'}`}>{f}</button>)}</div><div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">{list.map((p,i)=><ProjectCard key={p.title} project={p} index={i}/>)}</div></section><CTASection/></>}
+import { useState } from "react";
+import { PageIntro, ProjectCard, CTASection } from "../components/Shared";
+import { projects } from "../data/content";
+const filters = ["All", "Residential", "Commercial", "Interior"];
+export default function Gallery() {
+  const [filter, setFilter] = useState("All");
+  const list =
+    filter === "All" ? projects : projects.filter((p) => p.type === filter);
+  return (
+    <>
+      <PageIntro
+        eyebrow="Selected work"
+        title={
+          <>
+            A collection of spaces, ideas and{" "}
+            <span className="italic text-[#9b815b]">possibilities.</span>
+          </>
+        }
+        description="Explore a selection of architectural and interior design references. Replace these sample images with verified photographs of the firm's completed projects."
+      />
+      <section className="container-shell pb-20">
+        <div className="mb-8 flex flex-wrap gap-2">
+          {filters.map((f) => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`border px-4 py-2 text-xs transition ${filter === f ? "border-[#252724] bg-[#252724] text-white" : "border-[var(--line)] hover:border-[#252724]"}`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+        <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          {list.map((p, i) => (
+            <ProjectCard key={p.title} project={p} index={i} />
+          ))}
+        </div>
+      </section>
+      <CTASection />
+    </>
+  );
+}
