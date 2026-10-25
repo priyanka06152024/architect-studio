@@ -1,16 +1,10 @@
-
 import { useLayoutEffect, useRef } from "react";
-import {
-  Play,
-  ArrowUpRight,
-  ArrowDown,
-  MoveUpRight,
-} from "lucide-react";
+import { Play, ArrowUpRight, ArrowDown, MoveUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CTASection } from "../components/Shared";
-import videoimg from "../assets/images/videoimg.avif"
+import videoimg from "../assets/images/videoimg.avif";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,9 +35,7 @@ export default function Video() {
     if (!page) return;
 
     const ctx = gsap.context(() => {
-      if (
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      ) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         return;
       }
 
@@ -63,7 +55,7 @@ export default function Video() {
             duration: 1,
             stagger: 0.13,
           },
-          "-=0.3"
+          "-=0.3",
         )
         .from(
           ".video-hero-bottom",
@@ -72,7 +64,7 @@ export default function Video() {
             opacity: 0,
             duration: 0.7,
           },
-          "-=0.4"
+          "-=0.4",
         );
 
       // Featured film entrance
@@ -141,10 +133,7 @@ export default function Video() {
   }, []);
 
   return (
-    <main
-      ref={pageRef}
-      className="overflow-clip bg-[#f3f1e9] text-[#262720]"
-    >
+    <main ref={pageRef} className="overflow-clip bg-[#f3f1e9] text-[#262720]">
       {/* CINEMATIC HERO */}
       <section className="flex min-h-[66svh] flex-col justify-between bg-[#22231f] px-5 pb-8 pt-28 text-[#f3f1e9] sm:px-8 sm:pb-10 sm:pt-32 lg:min-h-[72svh] lg:px-14 lg:pb-12">
         <div className="video-hero-eyebrow flex items-center justify-between gap-4">
@@ -163,9 +152,7 @@ export default function Video() {
 
           <h1 className="font-serif text-[clamp(3.6rem,10vw,9rem)] leading-[0.86] tracking-[-0.075em]">
             <span className="block overflow-hidden pb-2">
-              <span className="video-hero-line block">
-                Beyond the
-              </span>
+              <span className="video-hero-line block">Beyond the</span>
             </span>
             <span className="block overflow-hidden pb-3">
               <span className="video-hero-line block italic text-[#c3d17a] pb-2">
@@ -177,8 +164,8 @@ export default function Video() {
 
         <div className="video-hero-bottom flex flex-col gap-6 border-t border-white/20 pt-6 sm:flex-row sm:items-end sm:justify-between">
           <p className="max-w-md text-sm leading-7 text-white/60 sm:text-base">
-            Architecture experienced through movement, natural light
-            and the details that make a space feel different.
+            Architecture experienced through movement, natural light and the
+            details that make a space feel different.
           </p>
 
           <a
@@ -200,9 +187,7 @@ export default function Video() {
       >
         <div className="video-reveal mb-8 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="eyebrow mb-4 text-[#777d52]">
-              Featured film / 01
-            </p>
+            <p className="eyebrow mb-4 text-[#777d52]">Featured film / 01</p>
             <h2 className="font-serif text-4xl leading-none tracking-[-0.055em] sm:text-6xl lg:text-7xl">
               Space in
               <span className="italic text-[#777d52]"> motion.</span>
@@ -210,8 +195,8 @@ export default function Video() {
           </div>
 
           <p className="max-w-xs text-sm leading-7 text-[#77786e]">
-            A different perspective on the spaces we create and the
-            experience they offer.
+            A different perspective on the spaces we create and the experience
+            they offer.
           </p>
         </div>
 
@@ -276,22 +261,18 @@ export default function Video() {
       <section className="bg-[#e7e5d9] px-5 py-20 sm:px-8 sm:py-28 lg:px-14 lg:py-32">
         <div className="video-reveal mb-12 flex flex-col gap-5 sm:mb-16 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="eyebrow mb-4 text-[#777d52]">
-              From concept to space
-            </p>
+            <p className="eyebrow mb-4 text-[#777d52]">From concept to space</p>
             <h2 className="max-w-2xl font-serif text-4xl leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
               The story behind
               <br />
-              <span className="italic text-[#777d52]">
-                the design.
-              </span>
+              <span className="italic text-[#777d52]">the design.</span>
             </h2>
           </div>
 
           <p className="max-w-sm text-sm leading-7 text-[#77786e]">
-            Good architecture is shaped by more than a final photograph.
-            It is the result of thoughtful questions, collaboration and
-            attention to detail.
+            Good architecture is shaped by more than a final photograph. It is
+            the result of thoughtful questions, collaboration and attention to
+            detail.
           </p>
         </div>
 
@@ -340,21 +321,17 @@ export default function Video() {
       <section className="container-shell py-20 sm:py-24 lg:py-28">
         <div className="video-reveal flex flex-col gap-8 border-t border-[#262720]/20 pt-7 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="eyebrow mb-4 text-[#777d52]">
-              Stay connected
-            </p>
+            <p className="eyebrow mb-4 text-[#777d52]">Stay connected</p>
 
             <h2 className="max-w-xl font-serif text-4xl leading-[0.98] tracking-[-0.055em] sm:text-6xl">
               More to see.
               <br />
-              <span className="italic text-[#777d52]">
-                More to discover.
-              </span>
+              <span className="italic text-[#777d52]">More to discover.</span>
             </h2>
 
             <p className="mt-5 max-w-md text-sm leading-7 text-[#77786e]">
-              Follow the studio for future project films, walkthroughs
-              and insights into our design process.
+              Follow the studio for future project films, walkthroughs and
+              insights into our design process.
             </p>
           </div>
 
@@ -362,12 +339,15 @@ export default function Video() {
             href="https://youtube.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex w-fit items-center justify-between gap-8 border border-[#262720]/30 px-5 py-4 text-[10px] uppercase tracking-[0.16em] transition-all duration-300 hover:border-[#262720] hover:bg-[#262720] hover:text-white sm:min-w-60"
+            className="group inline-flex w-fit items-center justify-between gap-8 border border-[#262720]/30 px-5 py-4 text-[10px] uppercase tracking-[0.16em] text-[#262720] transition-all duration-300 hover:border-[#262720] hover:bg-[#262720] hover:!text-white sm:min-w-60"
           >
-            Visit video channel
+            <span className="transition-colors duration-300 group-hover:!text-white">
+              Visit video channel
+            </span>
+
             <ArrowUpRight
               size={17}
-              className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+              className="transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:!text-white"
             />
           </a>
         </div>
