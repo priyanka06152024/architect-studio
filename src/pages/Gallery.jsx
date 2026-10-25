@@ -182,7 +182,7 @@ export default function Gallery() {
             </span>
 
             <span className="block overflow-hidden pb-3">
-              <span className="gallery-hero-line block italic text-[#c3d17a]">
+              <span className="gallery-hero-line block italic text-[#c3d17a] pb-3">
                 a point of
               </span>
             </span>

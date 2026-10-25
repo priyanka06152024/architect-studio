@@ -439,7 +439,7 @@ useLayoutEffect(() => {
                 <span className="hero-title-line block">A different</span>
               </span>
               <span className="block overflow-hidden pb-3">
-                <span className="hero-title-line block pl-[8vw] italic text-[#c3d17a]">
+                <span className="hero-title-line block pl-[8vw] pb-5 italic text-[#c3d17a]">
                   way to feel.
                 </span>
               </span>

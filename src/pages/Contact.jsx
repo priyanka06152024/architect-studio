@@ -165,7 +165,7 @@ export default function Contact() {
         </div>
 
         <div className="relative z-10 py-16 sm:py-20 lg:py-24">
-          <p className="mb-6 text-[10px] uppercase tracking-[0.22em] text-white/45 sm:text-xs">
+          <p className="mb-6 text-[10px] uppercase tracking-[0.22em] text-white/45 sm:text-xs ">
             Let's talk about your project
           </p>
 
@@ -183,7 +183,7 @@ export default function Contact() {
             </span>
 
             <span className="block overflow-hidden pb-2">
-              <span className="contact-title-line block italic text-[#c3cd91]">
+              <span className="contact-title-line block italic text-[#c3cd91] pb-3">
                 Let's begin.
               </span>
             </span>

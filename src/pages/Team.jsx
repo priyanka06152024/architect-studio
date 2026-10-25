@@ -143,7 +143,7 @@ export default function Team() {
               </span>
             </span>
             <span className="block overflow-hidden pb-3">
-              <span className="team-hero-line block italic text-[#c3d17a]">
+              <span className="team-hero-line block italic text-[#c3d17a] pb-2">
                 Thoughtful people.
               </span>
             </span>

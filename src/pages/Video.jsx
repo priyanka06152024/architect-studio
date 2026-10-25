@@ -168,7 +168,7 @@ export default function Video() {
               </span>
             </span>
             <span className="block overflow-hidden pb-3">
-              <span className="video-hero-line block italic text-[#c3d17a]">
+              <span className="video-hero-line block italic text-[#c3d17a] pb-2">
                 still frame.
               </span>
             </span>
