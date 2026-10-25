@@ -1,10 +1,18 @@
+import project1 from "../assets/images/project1.avif";
+import project2 from "../assets/images/project2.avif";
+import project3 from "../assets/images/project3.avif";
+import project4 from "../assets/images/project4.avif";
+import project5 from "../assets/images/project5.avif";
+import project6 from "../assets/images/project6.avif";
+
+
 export const projects = [
-  { title: 'Courtyard Residence', type: 'Residential', year: '2025', image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85' },
-  { title: 'The Quiet House', type: 'Residential', year: '2024', image: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=85' },
-  { title: 'Urban Workspace', type: 'Commercial', year: '2024', image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85' },
-  { title: 'Warm Minimal Living', type: 'Interior', year: '2023', image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85' },
-  { title: 'Modern Residence', type: 'Residential', year: '2023', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85' },
-  { title: 'Material & Light', type: 'Interior', year: '2022', image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=85' },
+  { title: 'Courtyard Residence', type: 'Residential', year: '2025', image:project1  },
+  { title: 'The Quiet House', type: 'Residential', year: '2024', image: project2 },
+  { title: 'Urban Workspace', type: 'Commercial', year: '2024', image: project3 },
+  { title: 'Warm Minimal Living', type: 'Interior', year: '2023', image: project4 },
+  { title: 'Modern Residence', type: 'Residential', year: '2023', image: project5 },
+  { title: 'Material & Light', type: 'Interior', year: '2022', image: project6 },
 ]
 export const services = [
   ['01', 'Architectural consultation', 'Clear, practical guidance from the first conversation to your next design decision.'],
