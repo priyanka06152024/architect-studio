@@ -12,6 +12,7 @@ import {
 import { FaInstagram } from "react-icons/fa";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import logo from "../assets/images/Shri Norris Architects Logo 1.webp"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,9 +31,9 @@ const nav = [
 const studioAddress =
   "Shop No. 3, Ground Floor, Opposite Bharat Petroleum, Kishanpur Tiraha, Avantika Phase 2, Ramghat Road, Aligarh, Uttar Pradesh 202001.";
 
-const gold = "#9b815b";
-const ink = "#252724";
-const paper = "#f5f2eb";
+const gold = "#FEC73A";
+const ink = "#002556";
+const paper = "#FFFFFF";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -104,33 +105,22 @@ export function Header() {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-50 border-b border-[#252724]/10 bg-[#f5f2eb]/90 backdrop-blur-2xl"
+      className="sticky top-0 z-50 border-b border-[#002556]/10 bg-[#FFFFFF]"
     >
       <div className="container-shell flex min-h-[78px] items-center justify-between gap-4">
         <Link
-          to="/"
-          className="header-brand group flex shrink-0 items-center gap-3"
-          onClick={() => setOpen(false)}
-        >
-          <span className="relative grid h-11 w-11 place-items-center overflow-hidden border border-[#252724]/70 font-display text-xl font-semibold transition duration-500 group-hover:border-[#9b815b] group-hover:bg-[#252724] group-hover:text-[#f5f2eb]">
-            <span className="relative z-10">
-              N
-              <span className="text-[#9b815b] group-hover:text-[#d8c8ae]">
-                .
-              </span>
-            </span>
-            <span className="absolute inset-x-0 bottom-0 h-0 bg-[#252724] transition-all duration-500 group-hover:h-full" />
-          </span>
-
-          <span className="leading-tight">
-            <span className="block font-display text-[13px] font-extrabold tracking-[.12em]">
-              SHRI NORRIS
-            </span>
-            <span className="mt-1.5 block text-[8px] tracking-[.22em] text-[#777970] sm:text-[9px]">
-              ARCHITECTS · ALIGARH
-            </span>
-          </span>
-        </Link>
+  to="/"
+  className="header-brand group flex shrink-0 items-center gap-3"
+  onClick={() => setOpen(false)}
+>
+  <span className="relative grid h-17 w-20 shrink-0 place-items-center overflow-hidden">
+    <img
+      src={logo}
+      alt="Shri Norris Architects Logo"
+      className="h-full w-full scale-[2.2] object-contain transition-transform duration-500 group-hover:scale-[1.7]"
+    />
+  </span>
+</Link>
 
         <nav className="hidden items-center gap-x-4 gap-y-2 xl:flex 2xl:gap-x-5">
           {nav.map(([label, to]) => (
@@ -141,8 +131,8 @@ export function Header() {
               className={({ isActive }) =>
                 `desktop-nav-link group relative whitespace-nowrap py-3 text-[10px] font-medium tracking-[.035em] transition-colors duration-300 2xl:text-[11px] ${
                   isActive
-                    ? "text-[#9b815b]"
-                    : "text-[#55574f] hover:text-[#252724]"
+                    ? "text-[#002556]"
+                    : "text-[#002556]/70 hover:text-[#002556]"
                 }`
               }
             >
@@ -150,7 +140,7 @@ export function Header() {
                 <>
                   {label}
                   <span
-                    className={`absolute bottom-1 left-0 h-px bg-[#9b815b] transition-all duration-400 ${
+                    className={`absolute bottom-1 left-0 h-px bg-[#FEC73A] transition-all duration-400 ${
                       isActive ? "w-full" : "w-0 group-hover:w-full"
                     }`}
                   />
@@ -160,25 +150,27 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden xl:block">
-          <a
-            className="header-action group inline-flex items-center gap-3 bg-[#252724] px-4 py-3 text-[10px] font-semibold uppercase tracking-[.12em] transition-colors duration-300 hover:bg-[#777d52] 2xl:px-5"
-            style={{ color: "#ffffff" }}
-            href="tel:+910000000000"
-          >
-            <span style={{ color: "#ffffff" }}>Let's talk</span>
+    <div className="hidden xl:block">
+  <a
+    href="tel:+910000000000"
+    style={{
+      color: "#FFFFFF",
+      backgroundColor: "#002556",
+    }}
+    className="header-action group inline-flex items-center gap-3 px-4 py-3 text-[10px] font-semibold uppercase tracking-[.12em] transition-colors duration-300 hover:!bg-[#FEC73A] hover:!text-[#002556] 2xl:px-5"
+  >
+    <span>Let's talk</span>
 
-            <ArrowUpRight
-              size={15}
-              color="#ffffff"
-              className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-            />
-          </a>
-        </div>
+    <ArrowUpRight
+      size={15}
+      className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+    />
+  </a>
+</div>
 
         <button
           type="button"
-          className="grid h-11 w-11 shrink-0 place-items-center border border-[#252724]/20 transition duration-300 hover:border-[#252724] hover:bg-[#252724] hover:text-[#f5f2eb] xl:hidden"
+          className="grid h-11 w-11 shrink-0 place-items-center border border-[#002556]/20 transition duration-300 hover:border-[#002556] hover:bg-[#002556] hover:text-[#FFFFFF] xl:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
@@ -192,14 +184,14 @@ export function Header() {
       {open && (
         <nav
           ref={menuRef}
-          className="overflow-hidden border-t border-[#252724]/10 bg-[#f5f2eb] xl:hidden"
+          className="overflow-hidden border-t border-[#002556]/10 bg-[#FFFFFF] xl:hidden"
         >
           <div className="container-shell pb-6 pt-3">
             <div className="mb-4 flex items-center justify-between">
-              <span className="text-[9px] uppercase tracking-[.22em] text-[#9b815b]">
+              <span className="text-[9px] uppercase tracking-[.22em] text-[#002556]">
                 Navigation / Explore
               </span>
-              <span className="font-display text-xs text-[#777970]">
+              <span className="font-display text-xs text-[#002556]/55">
                 SN — 01
               </span>
             </div>
@@ -212,15 +204,15 @@ export function Header() {
                   end={to === "/"}
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
-                    `mobile-nav-link group flex items-center justify-between gap-2 border-t border-[#252724]/10 py-4 text-sm transition-colors duration-300 ${
+                    `mobile-nav-link group flex items-center justify-between gap-2 border-t border-[#002556]/10 py-4 text-sm transition-colors duration-300 ${
                       isActive
-                        ? "font-semibold text-[#9b815b]"
-                        : "text-[#4f5149] hover:text-[#9b815b]"
+                        ? "font-semibold text-[#002556]"
+                        : "text-[#002556]/75 hover:text-[#002556]"
                     }`
                   }
                 >
                   <span className="flex items-center gap-2">
-                    <span className="font-mono text-[9px] text-[#9b815b]/70">
+                    <span className="font-mono text-[9px] text-[#b38600]">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     {label}
@@ -235,7 +227,7 @@ export function Header() {
 
             <a
               href="tel:+910000000000"
-              className="mt-5 flex items-center justify-between bg-[#252724] px-5 py-4 text-sm text-white transition-colors duration-300 hover:bg-[#9b815b]"
+              className="mt-5 flex items-center justify-between bg-[#002556] px-5 py-4 text-sm text-white transition-colors duration-300 hover:bg-[#FEC73A] hover:text-[#002556]"
             >
               <span>Let's discuss your project</span>
               <ArrowUpRight size={17} />
@@ -285,7 +277,7 @@ export function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative mt-0 overflow-hidden bg-[#252724] text-[#f5f2eb]"
+      className="relative mt-0 overflow-hidden bg-[#002556] text-[#FFFFFF]"
     >
       {/* Decorative architectural grid */}
       <div
@@ -293,7 +285,7 @@ export function Footer() {
         className="pointer-events-none absolute inset-0 opacity-[0.055]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #f5f2eb 1px, transparent 1px), linear-gradient(to bottom, #f5f2eb 1px, transparent 1px)",
+            "linear-gradient(to right, #FFFFFF 1px, transparent 1px), linear-gradient(to bottom, #FFFFFF 1px, transparent 1px)",
           backgroundSize: "72px 72px",
           maskImage:
             "linear-gradient(to bottom, transparent, black 25%, black 80%, transparent)",
@@ -305,8 +297,8 @@ export function Footer() {
         <div className="footer-reveal border-b border-white/15 py-16 sm:py-20 md:py-24">
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
-              <p className="flex items-center gap-3 text-[10px] uppercase tracking-[.24em] text-[#d8c8ae]">
-                <span className="h-px w-8 bg-[#9b815b]" />
+              <p className="flex items-center gap-3 text-[10px] uppercase tracking-[.24em] text-[#FEC73A]">
+                <span className="h-px w-8 bg-[#FEC73A]" />
                 Thoughtfully designed since 2001
               </p>
 
@@ -314,7 +306,7 @@ export function Footer() {
                 Let's make room
                 <br />
                 for something{" "}
-                <span className="font-normal italic text-[#c6b69c]">
+                <span className="font-normal italic text-[#FEC73A]">
                   meaningful.
                 </span>
               </h2>
@@ -322,7 +314,7 @@ export function Footer() {
 
             <Link
               to="/contact"
-              className="group relative flex h-24 w-24 items-center justify-center self-start rounded-full border border-white/25 transition-all duration-500 hover:rotate-[-35deg] hover:border-[#d8c8ae] hover:bg-[#d8c8ae] hover:text-[#252724] sm:h-28 sm:w-28 lg:self-end"
+              className="group relative flex h-24 w-24 items-center justify-center self-start rounded-full border border-white/25 transition-all duration-500 hover:rotate-[-35deg] hover:border-[#FEC73A] hover:bg-[#FEC73A] hover:text-[#002556] sm:h-28 sm:w-28 lg:self-end"
               aria-label="Start a conversation"
             >
               <ArrowUpRight
@@ -337,7 +329,7 @@ export function Footer() {
           </div>
 
           <Link
-            className="group mt-10 inline-flex items-center gap-3 border-b border-[#d8c8ae]/50 pb-2 text-xs uppercase tracking-[.15em] text-[#d8c8ae] transition-colors duration-300 hover:border-white hover:text-white"
+            className="group mt-10 inline-flex items-center gap-3 border-b border-[#FEC73A]/50 pb-2 text-xs uppercase tracking-[.15em] text-[#FEC73A] transition-colors duration-300 hover:border-white hover:text-white"
             to="/contact"
           >
             Start a conversation
@@ -352,8 +344,8 @@ export function Footer() {
         <div className="grid gap-12 py-14 sm:grid-cols-2 md:gap-10 md:py-16 lg:grid-cols-[1.1fr_.8fr_1fr]">
           <div className="footer-reveal">
             <Link to="/" className="group inline-flex items-center gap-3">
-              <span className="grid h-12 w-12 place-items-center border border-white/40 font-display text-2xl transition-colors duration-300 group-hover:border-[#d8c8ae] group-hover:bg-[#d8c8ae] group-hover:text-[#252724]">
-                N<span className="text-[#c6b69c]">.</span>
+              <span className="grid h-12 w-12 place-items-center border border-white/40 font-display text-2xl transition-colors duration-300 group-hover:border-[#FEC73A] group-hover:bg-[#FEC73A] group-hover:text-[#002556]">
+                N<span className="text-[#FEC73A]">.</span>
               </span>
               <span>
                 <span className="block font-display text-sm font-bold tracking-[.12em]">
@@ -373,14 +365,14 @@ export function Footer() {
             <div className="mt-7 flex gap-2">
               <a
                 aria-label="Call the studio"
-                className="group grid h-11 w-11 place-items-center border border-white/20 transition-all duration-300 hover:-translate-y-1 hover:border-[#d8c8ae] hover:bg-[#d8c8ae] hover:text-[#252724]"
+                className="group grid h-11 w-11 place-items-center border border-white/20 transition-all duration-300 hover:-translate-y-1 hover:border-[#FEC73A] hover:bg-[#FEC73A] hover:text-[#002556]"
                 href="tel:+910000000000"
               >
                 <Phone size={16} />
               </a>
               <a
                 aria-label="Contact on WhatsApp"
-                className="group grid h-11 w-11 place-items-center border border-white/20 transition-all duration-300 hover:-translate-y-1 hover:border-[#d8c8ae] hover:bg-[#d8c8ae] hover:text-[#252724]"
+                className="group grid h-11 w-11 place-items-center border border-white/20 transition-all duration-300 hover:-translate-y-1 hover:border-[#FEC73A] hover:bg-[#FEC73A] hover:text-[#002556]"
                 href="https://wa.me/910000000000"
                 target="_blank"
                 rel="noreferrer"
@@ -389,7 +381,7 @@ export function Footer() {
               </a>
               <a
                 aria-label="Instagram"
-                className="group grid h-11 w-11 place-items-center border border-white/20 transition-all duration-300 hover:-translate-y-1 hover:border-[#d8c8ae] hover:bg-[#d8c8ae] hover:text-[#252724]"
+                className="group grid h-11 w-11 place-items-center border border-white/20 transition-all duration-300 hover:-translate-y-1 hover:border-[#FEC73A] hover:bg-[#FEC73A] hover:text-[#002556]"
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer"
@@ -400,17 +392,17 @@ export function Footer() {
           </div>
 
           <div className="footer-reveal">
-            <p className="flex items-center gap-2 text-[10px] uppercase tracking-[.22em] text-[#d8c8ae]">
-              <span className="h-1 w-1 rounded-full bg-[#9b815b]" />
+            <p className="flex items-center gap-2 text-[10px] uppercase tracking-[.22em] text-[#FEC73A]">
+              <span className="h-1 w-1 rounded-full bg-[#FEC73A]" />
               Explore
             </p>
 
             <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-0">
-              {nav.slice(1).map(([label, to], index) => (
+              {nav.slice(1).map(([label, to]) => (
                 <Link
                   key={to}
                   to={to}
-                  className="group flex items-center justify-between gap-1 border-b border-white/10 py-3 text-[12px] text-white/60 transition-colors duration-300 hover:text-[#d8c8ae]"
+                  className="group flex items-center justify-between gap-1 border-b border-white/10 py-3 text-[12px] text-white/60 transition-colors duration-300 hover:text-[#FEC73A]"
                 >
                   <span>{label}</span>
                   <Plus
@@ -422,19 +414,19 @@ export function Footer() {
 
               <Link
                 to="/counters"
-                className="border-b border-white/10 py-3 text-[12px] text-white/60 transition-colors hover:text-[#d8c8ae]"
+                className="border-b border-white/10 py-3 text-[12px] text-white/60 transition-colors hover:text-[#FEC73A]"
               >
                 Website Counter
               </Link>
               <Link
                 to="/counters"
-                className="border-b border-white/10 py-3 text-[12px] text-white/60 transition-colors hover:text-[#d8c8ae]"
+                className="border-b border-white/10 py-3 text-[12px] text-white/60 transition-colors hover:text-[#FEC73A]"
               >
                 Visitor Hit Counter
               </Link>
               <Link
                 to="/language"
-                className="border-b border-white/10 py-3 text-[12px] text-white/60 transition-colors hover:text-[#d8c8ae]"
+                className="border-b border-white/10 py-3 text-[12px] text-white/60 transition-colors hover:text-[#FEC73A]"
               >
                 Language
               </Link>
@@ -442,8 +434,8 @@ export function Footer() {
           </div>
 
           <div className="footer-reveal">
-            <p className="flex items-center gap-2 text-[10px] uppercase tracking-[.22em] text-[#d8c8ae]">
-              <span className="h-1 w-1 rounded-full bg-[#9b815b]" />
+            <p className="flex items-center gap-2 text-[10px] uppercase tracking-[.22em] text-[#FEC73A]">
+              <span className="h-1 w-1 rounded-full bg-[#FEC73A]" />
               Visit our studio
             </p>
 
@@ -455,7 +447,7 @@ export function Footer() {
               href="https://maps.google.com/?q=Kishanpur+Tiraha+Ramghat+Road+Aligarh+Uttar+Pradesh+202001"
               target="_blank"
               rel="noreferrer"
-              className="group mt-5 inline-flex items-center gap-2 border-b border-white/20 pb-2 text-[11px] uppercase tracking-[.12em] text-[#d8c8ae] transition-colors hover:border-[#d8c8ae] hover:text-white"
+              className="group mt-5 inline-flex items-center gap-2 border-b border-white/20 pb-2 text-[11px] uppercase tracking-[.12em] text-[#FEC73A] transition-colors hover:border-[#FEC73A] hover:text-white"
             >
               Get directions
               <ArrowUpRight
@@ -474,14 +466,14 @@ export function Footer() {
           </span>
 
           <span className="uppercase tracking-[.15em]">
-            Architecture <span className="mx-1 text-[#9b815b]">·</span>
-            Interiors <span className="mx-1 text-[#9b815b]">·</span>
+            Architecture <span className="mx-1 text-[#FEC73A]">·</span>
+            Interiors <span className="mx-1 text-[#FEC73A]">·</span>
             Planning
           </span>
 
           <Link
             to="/"
-            className="group flex items-center gap-2 self-start transition-colors hover:text-[#d8c8ae] sm:self-auto"
+            className="group flex items-center gap-2 self-start transition-colors hover:text-[#FEC73A] sm:self-auto"
           >
             Back to beginning
             <ArrowUpRight
@@ -522,13 +514,13 @@ export function FloatingActions() {
       <a
         href="tel:+910000000000"
         aria-label="Call now"
-        className="floating-action group relative grid h-12 w-12 place-items-center rounded-full border border-white/15 bg-[#252724] text-white shadow-lg shadow-black/10 transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-[#9b815b] sm:h-[50px] sm:w-[50px]"
+        className="floating-action group relative grid h-12 w-12 place-items-center rounded-full border border-white/15 bg-[#002556] text-white shadow-lg shadow-black/10 transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-[#FEC73A] hover:text-[#002556] sm:h-[50px] sm:w-[50px]"
       >
         <Phone
           size={18}
           className="transition-transform duration-300 group-hover:rotate-[-12deg]"
         />
-        <span className="pointer-events-none absolute right-[calc(100%+10px)] translate-x-2 whitespace-nowrap bg-[#252724] px-3 py-2 text-[10px] uppercase tracking-[.12em] text-white opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+        <span className="pointer-events-none absolute right-[calc(100%+10px)] translate-x-2 whitespace-nowrap bg-[#002556] px-3 py-2 text-[10px] uppercase tracking-[.12em] text-white opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
           Call studio
         </span>
       </a>
@@ -538,13 +530,13 @@ export function FloatingActions() {
         target="_blank"
         rel="noreferrer"
         aria-label="WhatsApp now"
-        className="floating-action group relative grid h-12 w-12 place-items-center rounded-full bg-[#d8c8ae] text-[#252724] shadow-lg shadow-black/10 transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-[#f5f2eb] sm:h-[50px] sm:w-[50px]"
+        className="floating-action group relative grid h-12 w-12 place-items-center rounded-full bg-[#FEC73A] text-[#002556] shadow-lg shadow-black/10 transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-white sm:h-[50px] sm:w-[50px]"
       >
         <MessageCircle
           size={19}
           className="transition-transform duration-300 group-hover:rotate-[-8deg]"
         />
-        <span className="pointer-events-none absolute right-[calc(100%+10px)] translate-x-2 whitespace-nowrap bg-[#d8c8ae] px-3 py-2 text-[10px] uppercase tracking-[.12em] text-[#252724] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+        <span className="pointer-events-none absolute right-[calc(100%+10px)] translate-x-2 whitespace-nowrap bg-[#FEC73A] px-3 py-2 text-[10px] uppercase tracking-[.12em] text-[#002556] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
           WhatsApp
         </span>
       </a>
