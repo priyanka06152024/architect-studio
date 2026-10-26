@@ -1,10 +1,10 @@
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#F5F2EB"/>
+  <rect width="64" height="64" rx="12" fill="#002556"/>
 
   <g
     fill="none"
-    stroke="#6F7658"
+    stroke="#FFFFFF"
     stroke-width="2.5"
     stroke-linecap="square"
     stroke-linejoin="miter"
@@ -16,14 +16,14 @@
 
   <path
     d="M10 53H54"
-    stroke="#B5A17D"
-    stroke-width="2"
+    stroke="#FEC73A"
+    stroke-width="2.5"
     stroke-linecap="round"
   />
 
   <path
     d="M32 13V25"
-    stroke="#B5A17D"
+    stroke="#FEC73A"
     stroke-width="2"
     stroke-linecap="round"
   />
