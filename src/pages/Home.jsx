@@ -1,4 +1,3 @@
-
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   ArrowDown,
@@ -151,26 +150,22 @@ export default function Home() {
 
   // Slider state and refs: declared only once.
   const [activeSlide, setActiveSlide] = useState(0);
-const [isAnimating, setIsAnimating] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-const heroImageRef = useRef(null);
-const heroContentRef = useRef(null);
-const heroProgressRef = useRef(null);
-const slideTimerRef = useRef(null);
+  const heroImageRef = useRef(null);
+  const heroContentRef = useRef(null);
+  const heroProgressRef = useRef(null);
+  const slideTimerRef = useRef(null);
 
-const changeSlide = (direction) => {
-  if (isAnimating) return;
+  const changeSlide = (direction) => {
+    if (isAnimating) return;
 
-  setIsAnimating(true);
+    setIsAnimating(true);
 
-  setActiveSlide((current) => {
-    return (
-      current + direction + heroSlides.length
-    ) % heroSlides.length;
-  });
-};
-
- 
+    setActiveSlide((current) => {
+      return (current + direction + heroSlides.length) % heroSlides.length;
+    });
+  };
 
   const workItems = media.work.map((image, index) => {
     const project = projects?.[index];
@@ -189,95 +184,85 @@ const changeSlide = (direction) => {
 
   const serviceItems = services?.length ? services : serviceDefaults;
 
-  // Slider autoplay.
+
+  // Animate the active slide and restart its progress indicator.
+  useLayoutEffect(() => {
+    const image = heroImageRef.current;
+    const content = heroContentRef.current;
+    const progress = heroProgressRef.current;
+
+    if (!image || !content) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        onComplete: () => setIsAnimating(false),
+      });
+
+      tl.to(image, {
+        scale: 1.12,
+        opacity: 0,
+        clipPath: "inset(0 0 0 100%)",
+        duration: 0.45,
+        ease: "power2.in",
+      });
+
+      tl.set(image, {
+        clipPath: "inset(0 0 0 0)",
+        scale: 1.12,
+        opacity: 0,
+      });
+
+      tl.to(image, {
+        scale: 1,
+        opacity: 1,
+        duration: 1.15,
+        ease: "power3.out",
+      });
+
+      tl.fromTo(
+        content.querySelectorAll(".slider-reveal"),
+        {
+          y: 35,
+          opacity: 0,
+          clipPath: "inset(0 0 100% 0)",
+        },
+        {
+          y: 0,
+          opacity: 1,
+          clipPath: "inset(0 0 0% 0)",
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power3.out",
+        },
+        "-=0.8",
+      );
+
+      if (progress) {
+        gsap.set(progress, {
+          scaleX: 0,
+          transformOrigin: "left center",
+        });
+
+        gsap.to(progress, {
+          scaleX: 1,
+          duration: 5.5,
+          ease: "none",
+        });
+      }
+    });
+
+    return () => ctx.revert();
+  }, [activeSlide]);
+
   useEffect(() => {
-    const timer = window.setInterval(() => {
+    slideTimerRef.current = window.setInterval(() => {
       setActiveSlide((current) => (current + 1) % heroSlides.length);
     }, 5500);
 
-    return () => window.clearInterval(timer);
+    return () => {
+      window.clearInterval(slideTimerRef.current);
+    };
   }, []);
-
-  // Animate the active slide and restart its progress indicator.
-useLayoutEffect(() => {
-  const image = heroImageRef.current;
-  const content = heroContentRef.current;
-  const progress = heroProgressRef.current;
-
-  if (!image || !content) return;
-
-  const ctx = gsap.context(() => {
-    const tl = gsap.timeline({
-      onComplete: () => setIsAnimating(false),
-    });
-
-    tl.to(image, {
-      scale: 1.12,
-      opacity: 0,
-      clipPath: "inset(0 0 0 100%)",
-      duration: 0.45,
-      ease: "power2.in",
-    });
-
-    tl.set(image, {
-      clipPath: "inset(0 0 0 0)",
-      scale: 1.12,
-      opacity: 0,
-    });
-
-    tl.to(image, {
-      scale: 1,
-      opacity: 1,
-      duration: 1.15,
-      ease: "power3.out",
-    });
-
-    tl.fromTo(
-      content.querySelectorAll(".slider-reveal"),
-      {
-        y: 35,
-        opacity: 0,
-        clipPath: "inset(0 0 100% 0)",
-      },
-      {
-        y: 0,
-        opacity: 1,
-        clipPath: "inset(0 0 0% 0)",
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-      },
-      "-=0.8"
-    );
-
-    if (progress) {
-      gsap.set(progress, {
-        scaleX: 0,
-        transformOrigin: "left center",
-      });
-
-      gsap.to(progress, {
-        scaleX: 1,
-        duration: 5.5,
-        ease: "none",
-      });
-    }
-  });
-
-  return () => ctx.revert();
-}, [activeSlide]);
-
-useEffect(() => {
-  slideTimerRef.current = window.setInterval(() => {
-    setActiveSlide((current) => (
-      current + 1
-    ) % heroSlides.length);
-  }, 5500);
-
-  return () => {
-    window.clearInterval(slideTimerRef.current);
-  };
-}, []);
   // Main page animations and smooth scrolling.
   useLayoutEffect(() => {
     const root = rootRef.current;
@@ -305,42 +290,30 @@ useEffect(() => {
 
     const ctx = gsap.context(() => {
       const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
+        "(prefers-reduced-motion: reduce)",
       ).matches;
 
       if (!reducedMotion) {
         // Hero entrance.
-        gsap
-          .timeline({
-            delay: 0.15,
-            defaults: { ease: "power3.out" },
-          })
-          .from(".nav-enter", {
-            y: 16,
-            autoAlpha: 0,
-            duration: 0.8,
-            stagger: 0.1,
-          })
-          .from(
-            ".hero-photo",
+
+        // Hero entrance — animate only elements that actually exist.
+        const heroPhoto = root.querySelector(".hero-photo");
+
+        if (heroPhoto) {
+          gsap.fromTo(
+            heroPhoto,
             {
               clipPath: "inset(0 0 100% 0)",
+            },
+            {
+              clipPath: "inset(0 0 0% 0)",
               duration: 1.2,
+              delay: 0.15,
               ease: "power3.inOut",
               clearProps: "clipPath",
             },
-            "-=0.4"
-          )
-          .from(
-            ".hero-meta-bottom",
-            {
-              y: 14,
-              autoAlpha: 0,
-              duration: 0.7,
-              stagger: 0.1,
-            },
-            "-=0.5"
           );
+        }
 
         // Hero image parallax.
         if (heroRef.current) {
@@ -374,7 +347,7 @@ useEffect(() => {
                 start: "top 86%",
                 once: true,
               },
-            }
+            },
           );
         });
 
@@ -393,7 +366,7 @@ useEffect(() => {
                 start: "top 88%",
                 once: true,
               },
-            }
+            },
           );
         });
 
@@ -416,7 +389,7 @@ useEffect(() => {
                 start: "top 84%",
                 once: true,
               },
-            }
+            },
           );
         }
       }
@@ -508,169 +481,167 @@ useEffect(() => {
     >
       {/* HERO SLIDER */}
 
-     <section
-  ref={heroRef}
-  className="relative min-h-screen overflow-hidden bg-[#002556] text-white"
->
-  {/* Background atmosphere */}
-  <div className="pointer-events-none absolute inset-0">
-    <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-[#FEC73A]/10 blur-[130px]" />
-    <div className="absolute bottom-0 left-0 h-[300px] w-[300px] rounded-full bg-white/[0.04] blur-[100px]" />
-  </div>
-
- 
-  {/* Slider content */}
-  <div
-    ref={heroContentRef}
-    className="relative z-10 mx-auto grid min-h-[calc(100vh-80px)] max-w-[1600px] items-center gap-10 px-6 py-12 sm:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 lg:px-16 lg:py-16"
-  >
-    {/* Left side */}
-    <div className="relative z-10">
-      <div className="slider-reveal mb-8 flex items-center gap-3 text-[10px] tracking-[0.25em] text-white/60 sm:text-xs">
-        <span className="h-px w-8 bg-[#FEC73A]" />
-        {heroSlides[activeSlide].eyebrow}
-      </div>
-
-      <div className="overflow-hidden">
-        <h1
-          key={`title-${activeSlide}`}
-          className="slider-reveal text-[clamp(3.5rem,8vw,8rem)] font-light leading-[0.88] tracking-[-0.075em] pb-3"
-        >
-          {heroSlides[activeSlide].firstLine}
-          <br />
-          <span className="font-normal text-[#FEC73A]">
-            {heroSlides[activeSlide].secondLine}
-          </span>
-        </h1>
-      </div>
-
-      <p
-        key={`description-${activeSlide}`}
-        className="slider-reveal mt-8 max-w-md text-sm leading-7 text-white/65 sm:text-base sm:leading-8"
+      <section
+        ref={heroRef}
+        className="relative min-h-screen overflow-hidden bg-[#002556] text-white"
       >
-        {heroSlides[activeSlide].description}
-      </p>
-
-      <div className="slider-reveal mt-9">
-        <Link
-          to="/gallery"
-          className="group inline-flex items-center gap-5 border border-white/25 px-5 py-4 text-[10px] tracking-[0.18em] transition-colors duration-300 hover:border-[#FEC73A] hover:bg-[#FEC73A] hover:text-[#002556] sm:px-6"
-        >
-          EXPLORE OUR WORK
-
-          <span className="grid h-8 w-8 place-items-center rounded-full border border-current transition-transform duration-300 group-hover:rotate-45">
-            <ArrowUpRight size={17} />
-          </span>
-        </Link>
-      </div>
-
-      {/* Slide navigation */}
-      <div className="slider-reveal mt-12 flex items-center gap-5">
-        <button
-          type="button"
-          onClick={() => changeSlide(-1)}
-          aria-label="Previous slide"
-          className="grid h-12 w-12 place-items-center rounded-full border border-white/25 transition-all duration-300 hover:border-[#FEC73A] hover:bg-[#FEC73A] hover:text-[#002556] disabled:opacity-50"
-          disabled={isAnimating}
-        >
-          <ArrowLeft size={18} />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => changeSlide(1)}
-          aria-label="Next slide"
-          className="grid h-12 w-12 place-items-center rounded-full border border-white/25 transition-all duration-300 hover:border-[#FEC73A] hover:bg-[#FEC73A] hover:text-[#002556] disabled:opacity-50"
-          disabled={isAnimating}
-        >
-          <ArrowRight size={18} />
-        </button>
-
-        <div className="ml-2 flex items-center gap-2">
-          {heroSlides.map((slide, index) => (
-            <button
-              key={slide.label}
-              type="button"
-              aria-label={`Go to slide ${index + 1}`}
-              onClick={() => {
-                if (index === activeSlide || isAnimating) return;
-                setActiveSlide(index);
-              }}
-              className={`h-1 transition-all duration-500 ${
-                index === activeSlide
-                  ? "w-10 bg-[#FEC73A]"
-                  : "w-4 bg-white/30 hover:bg-white/70"
-              }`}
-            />
-          ))}
+        {/* Background atmosphere */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-[#FEC73A]/10 blur-[130px]" />
+          <div className="absolute bottom-0 left-0 h-[300px] w-[300px] rounded-full bg-white/[0.04] blur-[100px]" />
         </div>
-      </div>
-    </div>
 
-    {/* Right side — cinematic image */}
-    <div className="relative">
-      <div className="absolute -inset-3 border border-white/10 sm:-inset-5" />
+        {/* Slider content */}
+        <div
+          ref={heroContentRef}
+          className="relative z-10 mx-auto grid min-h-[calc(100vh-80px)] max-w-[1600px] items-center gap-10 px-6 py-12 sm:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 lg:px-16 lg:py-16"
+        >
+          {/* Left side */}
+          <div className="relative z-10">
+            <div className="slider-reveal mb-8 flex items-center gap-3 text-[10px] tracking-[0.25em] text-white/60 sm:text-xs">
+              <span className="h-px w-8 bg-[#FEC73A]" />
+              {heroSlides[activeSlide].eyebrow}
+            </div>
 
-      <div className="hero-photo group relative h-[46vh] min-h-[340px] overflow-hidden sm:h-[58vh] lg:h-[70vh]">
-        <img
-          ref={heroImageRef}
-          key={heroSlides[activeSlide].image}
-          src={heroSlides[activeSlide].image}
-          alt={heroSlides[activeSlide].alt}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+            <div className="overflow-hidden">
+              <h1
+                key={`title-${activeSlide}`}
+                className="slider-reveal text-[clamp(3.5rem,8vw,8rem)] font-light leading-[0.88] tracking-[-0.075em] pb-3"
+              >
+                {heroSlides[activeSlide].firstLine}
+                <br />
+                <span className="font-normal text-[#FEC73A]">
+                  {heroSlides[activeSlide].secondLine}
+                </span>
+              </h1>
+            </div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-[#00142e]/80 via-transparent to-[#002556]/10" />
-
-        {/* Image frame detail */}
-        <div className="absolute inset-4 border border-white/20 sm:inset-6" />
-
-        <div className="absolute bottom-8 left-8 right-8 flex items-end justify-between gap-4 sm:bottom-10 sm:left-10 sm:right-10">
-          <div className="min-w-0">
-            <p className="text-[9px] tracking-[0.25em] text-[#FEC73A] sm:text-[10px]">
-              {heroSlides[activeSlide].label}
+            <p
+              key={`description-${activeSlide}`}
+              className="slider-reveal mt-8 max-w-md text-sm leading-7 text-white/65 sm:text-base sm:leading-8"
+            >
+              {heroSlides[activeSlide].description}
             </p>
 
-            <p className="mt-3 max-w-sm text-xl font-light tracking-tight sm:text-3xl">
-              {heroSlides[activeSlide].featured}
-            </p>
+            <div className="slider-reveal mt-9">
+              <Link
+                to="/gallery"
+                className="group inline-flex items-center gap-5 border border-white/25 px-5 py-4 text-[10px] tracking-[0.18em] transition-colors duration-300 hover:border-[#FEC73A] hover:bg-[#FEC73A] hover:text-[#002556] sm:px-6"
+              >
+                EXPLORE OUR WORK
+                <span className="grid h-8 w-8 place-items-center rounded-full border border-current transition-transform duration-300 group-hover:rotate-45">
+                  <ArrowUpRight size={17} />
+                </span>
+              </Link>
+            </div>
+
+            {/* Slide navigation */}
+            <div className="slider-reveal mt-12 flex items-center gap-5">
+              <button
+                type="button"
+                onClick={() => changeSlide(-1)}
+                aria-label="Previous slide"
+                className="grid h-12 w-12 place-items-center rounded-full border border-white/25 transition-all duration-300 hover:border-[#FEC73A] hover:bg-[#FEC73A] hover:text-[#002556] disabled:opacity-50"
+                disabled={isAnimating}
+              >
+                <ArrowLeft size={18} />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => changeSlide(1)}
+                aria-label="Next slide"
+                className="grid h-12 w-12 place-items-center rounded-full border border-white/25 transition-all duration-300 hover:border-[#FEC73A] hover:bg-[#FEC73A] hover:text-[#002556] disabled:opacity-50"
+                disabled={isAnimating}
+              >
+                <ArrowRight size={18} />
+              </button>
+
+              <div className="ml-2 flex items-center gap-2">
+                {heroSlides.map((slide, index) => (
+                  <button
+                    key={slide.label}
+                    type="button"
+                    aria-label={`Go to slide ${index + 1}`}
+                    onClick={() => {
+                      if (index === activeSlide || isAnimating) return;
+                      setActiveSlide(index);
+                    }}
+                    className={`h-1 transition-all duration-500 ${
+                      index === activeSlide
+                        ? "w-10 bg-[#FEC73A]"
+                        : "w-4 bg-white/30 hover:bg-white/70"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
-          <span className="shrink-0 text-[9px] tracking-[0.18em] text-white/70 sm:text-[10px]">
-            {heroSlides[activeSlide].location}
-          </span>
+          {/* Right side — cinematic image */}
+          <div className="relative">
+            <div className="absolute -inset-3 border border-white/10 sm:-inset-5" />
+
+            <div className="hero-photo group relative h-[46vh] min-h-[340px] overflow-hidden sm:h-[58vh] lg:h-[70vh]">
+              <img
+                ref={heroImageRef}
+                key={heroSlides[activeSlide].image}
+                src={heroSlides[activeSlide].image}
+                alt={heroSlides[activeSlide].alt}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-[#00142e]/80 via-transparent to-[#002556]/10" />
+
+              {/* Image frame detail */}
+              <div className="absolute inset-4 border border-white/20 sm:inset-6" />
+
+              <div className="absolute bottom-8 left-8 right-8 flex items-end justify-between gap-4 sm:bottom-10 sm:left-10 sm:right-10">
+                <div className="min-w-0">
+                  <p className="text-[9px] tracking-[0.25em] text-[#FEC73A] sm:text-[10px]">
+                    {heroSlides[activeSlide].label}
+                  </p>
+
+                  <p className="mt-3 max-w-sm text-xl font-light tracking-tight sm:text-3xl">
+                    {heroSlides[activeSlide].featured}
+                  </p>
+                </div>
+
+                <span className="shrink-0 text-[9px] tracking-[0.18em] text-white/70 sm:text-[10px]">
+                  {heroSlides[activeSlide].location}
+                </span>
+              </div>
+
+              {/* Vertical index */}
+              <div className="absolute right-7 top-8 hidden [writing-mode:vertical-rl] text-[9px] tracking-[0.3em] text-white/75 sm:block">
+                SHAPING SPACES SINCE 2001
+              </div>
+            </div>
+
+            {/* Bottom progress bar */}
+            <div className="mt-5 h-px w-full overflow-hidden bg-white/20">
+              <div
+                ref={heroProgressRef}
+                className="h-full w-full origin-left scale-x-0 bg-[#FEC73A]"
+              />
+            </div>
+
+            <div className="mt-3 flex justify-between text-[9px] tracking-[0.2em] text-white/45">
+              <span>SHRI NORRIS ARCHITECTS</span>
+              <span>ALIGARH · INDIA</span>
+            </div>
+          </div>
         </div>
 
-        {/* Vertical index */}
-        <div className="absolute right-7 top-8 hidden [writing-mode:vertical-rl] text-[9px] tracking-[0.3em] text-white/75 sm:block">
-          SHAPING SPACES SINCE 2001
-        </div>
-      </div>
-
-      {/* Bottom progress bar */}
-      <div className="mt-5 h-px w-full overflow-hidden bg-white/20">
-        <div
-          ref={heroProgressRef}
-          className="h-full w-full origin-left scale-x-0 bg-[#FEC73A]"
-        />
-      </div>
-
-      <div className="mt-3 flex justify-between text-[9px] tracking-[0.2em] text-white/45">
-        <span>SHRI NORRIS ARCHITECTS</span>
-        <span>ALIGARH · INDIA</span>
-      </div>
-    </div>
-  </div>
-
-  {/* Bottom scroll hint */}
-  <a
-    href="#studio"
-    className="absolute bottom-5 left-6 z-10 hidden items-center gap-3 text-[9px] tracking-[0.2em] text-white/55 transition-colors hover:text-[#FEC73A] lg:flex lg:left-16"
-  >
-    <ArrowDown size={14} />
-    SCROLL TO DISCOVER
-  </a>
-</section>
+        {/* Bottom scroll hint */}
+        <a
+          href="#studio"
+          className="absolute bottom-5 left-6 z-10 hidden items-center gap-3 text-[9px] tracking-[0.2em] text-white/55 transition-colors hover:text-[#FEC73A] lg:flex lg:left-16"
+        >
+          <ArrowDown size={14} />
+          SCROLL TO DISCOVER
+        </a>
+      </section>
       {/* STUDIO INTRO */}
 
       <section
@@ -780,7 +751,7 @@ useEffect(() => {
           {serviceItems.map((service, index) => {
             const number = Array.isArray(service)
               ? service[0]
-              : service.number ?? String(index + 1).padStart(2, "0");
+              : (service.number ?? String(index + 1).padStart(2, "0"));
 
             const title = Array.isArray(service) ? service[1] : service.title;
             const description = Array.isArray(service)
@@ -960,9 +931,7 @@ useEffect(() => {
                 }`}
               >
                 <div>
-                  <span className="font-serif text-5xl text-[#002556]">
-                    “
-                  </span>
+                  <span className="font-serif text-5xl text-[#002556]">“</span>
                   <p className="mt-3 font-serif text-xl leading-relaxed sm:text-2xl">
                     {item.quote}
                   </p>
