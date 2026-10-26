@@ -1,538 +1,629 @@
+// src/pages/About.jsx
 
 import { useLayoutEffect, useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { PageIntro, CTASection } from "../components/Shared";
-import aboutimg from "../assets/images/aboutimg.avif";
+
+import { projects, services, testimonials } from "../data/content";
+
+import aboutImg from "../assets/images/aboutimg.avif";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const NAVY = "#002556";
+const YELLOW = "#FEC73A";
+const WHITE = "#FFFFFF";
+
+function Eyebrow({ children, light = false }) {
+  return (
+    <span
+      className={`inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] ${
+        light ? "text-white/65" : "text-[#002556]/65"
+      }`}
+    >
+      <span
+        className="h-2 w-2 rounded-full"
+        style={{ backgroundColor: YELLOW }}
+      />
+      {children}
+    </span>
+  );
+}
+
+function CircleLink({ to = "/contact", children = "Let's talk" }) {
+  return (
+    <Link to={to} className="group inline-flex items-center gap-4">
+      <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-[#002556]/25 transition-all duration-500 group-hover:border-[#002556] group-hover:bg-[#002556]">
+        <ArrowUpRight
+          size={17}
+          className="relative z-10 text-[#002556] transition-all duration-500 group-hover:translate-x-8 group-hover:-translate-y-8 group-hover:text-white"
+        />
+
+        <ArrowUpRight
+          size={17}
+          className="absolute -translate-x-8 translate-y-8 text-white transition-all duration-500 group-hover:translate-x-0 group-hover:translate-y-0"
+        />
+      </span>
+
+      <span className="text-[11px] uppercase tracking-[0.16em] text-[#002556]">
+        {children}
+      </span>
+    </Link>
+  );
+}
+
+function RevealImage({ src, alt, className = "" }) {
+  return (
+    <div className={`group relative overflow-hidden bg-[#002556] ${className}`}>
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.045]"
+      />
+
+      <div className="pointer-events-none absolute inset-0 bg-[#002556]/10 transition-colors duration-500 group-hover:bg-transparent" />
+    </div>
+  );
+}
+
 export default function About() {
-  const pageRef = useRef(null);
+  const rootRef = useRef(null);
 
   useLayoutEffect(() => {
-    const page = pageRef.current;
-    if (!page) return;
-
     const ctx = gsap.context(() => {
-      const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
+      const introItems = gsap.utils.toArray(".about-reveal");
 
-      if (reduceMotion) return;
+      gsap.fromTo(
+        introItems,
+        {
+          y: 45,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.12,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".about-intro",
+            start: "top 78%",
+            once: true,
+          },
+        },
+      );
 
-      // 1. Intro entrance
-      const intro = page.querySelector(".about-intro");
-
-      if (intro) {
-        const introItems = intro.querySelectorAll(
-          ".about-intro-item"
-        );
-
+      gsap.utils.toArray(".about-fade").forEach((element) => {
         gsap.fromTo(
-          introItems,
+          element,
           {
-            y: 28,
-            autoAlpha: 0,
+            y: 35,
+            opacity: 0,
           },
           {
             y: 0,
-            autoAlpha: 1,
-            duration: 1,
-            stagger: 0.14,
+            opacity: 1,
+            duration: 0.9,
             ease: "power3.out",
-            clearProps: "transform,opacity,visibility",
             scrollTrigger: {
-              trigger: intro,
-              start: "top 88%",
+              trigger: element,
+              start: "top 86%",
               once: true,
             },
-          }
+          },
         );
-      }
+      });
 
-      // 2. Story image reveal + subtle image movement
-      page.querySelectorAll(".about-image").forEach((wrapper) => {
-        const image = wrapper.querySelector("img");
-
+      gsap.utils.toArray(".about-image-reveal").forEach((element) => {
         gsap.fromTo(
-          wrapper,
+          element,
           {
             clipPath: "inset(0 0 100% 0)",
           },
           {
             clipPath: "inset(0 0 0% 0)",
-            duration: 1.35,
-            ease: "power3.inOut",
-            clearProps: "clipPath",
+            duration: 1.2,
+            ease: "power4.inOut",
             scrollTrigger: {
-              trigger: wrapper,
+              trigger: element,
               start: "top 82%",
               once: true,
             },
-          }
+          },
         );
-
-        if (image) {
-          gsap.fromTo(
-            image,
-            {
-              scale: 1.16,
-              yPercent: 4,
-            },
-            {
-              scale: 1,
-              yPercent: 0,
-              duration: 1.6,
-              ease: "power3.out",
-              clearProps: "transform",
-              scrollTrigger: {
-                trigger: wrapper,
-                start: "top 82%",
-                once: true,
-              },
-            }
-          );
-        }
       });
 
-      // 3. Story text reveal
-      gsap.utils.toArray(".about-story-reveal").forEach((element) => {
+      gsap.utils.toArray(".about-line").forEach((element) => {
         gsap.fromTo(
           element,
           {
-            y: 32,
-            autoAlpha: 0,
+            scaleX: 0,
+            transformOrigin: "left",
           },
           {
-            y: 0,
-            autoAlpha: 1,
-            duration: 0.95,
-            ease: "power3.out",
-            clearProps: "transform,opacity,visibility",
-            scrollTrigger: {
-              trigger: element,
-              start: "top 87%",
-              once: true,
-            },
-          }
-        );
-      });
-
-      // 4. Approach steps — cascading reveal
-      const approach = page.querySelector(".about-approach");
-
-      if (approach) {
-        gsap.fromTo(
-          approach.querySelectorAll(".about-step"),
-          {
-            y: 24,
-            autoAlpha: 0,
-          },
-          {
-            y: 0,
-            autoAlpha: 1,
-            duration: 0.8,
-            stagger: 0.12,
-            ease: "power3.out",
-            clearProps: "transform,opacity,visibility",
-            scrollTrigger: {
-              trigger: approach,
-              start: "top 84%",
-              once: true,
-            },
-          }
-        );
-      }
-
-      // 5. Belief cards — staggered entrance
-      const beliefSection = page.querySelector(".about-beliefs");
-
-      if (beliefSection) {
-        gsap.fromTo(
-          beliefSection.querySelectorAll(".about-belief-card"),
-          {
-            y: 38,
-            autoAlpha: 0,
-          },
-          {
-            y: 0,
-            autoAlpha: 1,
-            duration: 0.9,
-            stagger: 0.16,
-            ease: "power3.out",
-            clearProps: "transform,opacity,visibility",
-            scrollTrigger: {
-              trigger: beliefSection,
-              start: "top 82%",
-              once: true,
-            },
-          }
-        );
-      }
-
-      // 6. Section eyebrow and divider details
-      gsap.utils.toArray(".about-eyebrow").forEach((element) => {
-        gsap.fromTo(
-          element,
-          {
-            x: -14,
-            autoAlpha: 0,
-          },
-          {
-            x: 0,
-            autoAlpha: 1,
-            duration: 0.75,
-            ease: "power2.out",
-            clearProps: "transform,opacity,visibility",
-            scrollTrigger: {
-              trigger: element,
-              start: "top 90%",
-              once: true,
-            },
-          }
-        );
-      });
-
-      // 7. CTA entrance
-      const cta = page.querySelector(".about-cta");
-
-      if (cta) {
-        gsap.fromTo(
-          cta,
-          {
-            y: 35,
-            autoAlpha: 0,
-          },
-          {
-            y: 0,
-            autoAlpha: 1,
+            scaleX: 1,
             duration: 1,
-            ease: "power3.out",
-            clearProps: "transform,opacity,visibility",
+            ease: "power3.inOut",
             scrollTrigger: {
-              trigger: cta,
+              trigger: element,
               start: "top 90%",
               once: true,
             },
-          }
+          },
         );
-      }
-
-      // Refresh after images finish loading.
-      const images = page.querySelectorAll("img");
-
-      images.forEach((image) => {
-        if (!image.complete) {
-          image.addEventListener("load", ScrollTrigger.refresh, {
-            once: true,
-          });
-        }
       });
 
-      requestAnimationFrame(() => ScrollTrigger.refresh());
-    }, page);
+      if (window.matchMedia("(min-width: 768px)").matches) {
+        gsap.to(".about-floating-image", {
+          yPercent: -10,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".about-floating-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+      }
+    }, rootRef);
 
     return () => ctx.revert();
   }, []);
 
- 
-return (
-  <main ref={pageRef} className="about-page overflow-clip bg-[#f3f1e9] text-[#262720]">
-    {/* INTRO */}
-    <section className="relative overflow-hidden bg-[#22231f] px-5 pb-14 pt-10 text-[#f3f1e9] sm:px-8 sm:pb-20 lg:px-[5vw]">
-      <div className="pointer-events-none absolute -right-20 top-20 h-72 w-72 rounded-full border border-white/[0.07] sm:h-[450px] sm:w-[450px]" />
-      <div className="pointer-events-none absolute -right-8 top-32 h-56 w-56 rounded-full border border-[#c3d17a]/15 sm:h-[350px] sm:w-[350px]" />
+  const milestones = [
+    {
+      number: "01",
+      year: "2001",
+      title: "The Beginning",
+      description:
+        "Our journey began with a clear vision: to create thoughtful spaces shaped around people, purpose, and place.",
+    },
+    {
+      number: "02",
+      year: "Growth",
+      title: "Building Trust",
+      description:
+        "Through years of collaboration and careful execution, we built lasting relationships with our clients.",
+    },
+    {
+      number: "03",
+      year: "Today",
+      title: "Looking Forward",
+      description:
+        "We continue to explore better ways of designing and building spaces that feel timeless and meaningful.",
+    },
+  ];
 
-      <div className="about-intro relative z-10">
-        <div className="about-intro-item flex items-center justify-between gap-4 border-b border-white/15 pb-5">
-          <span className="text-[9px] uppercase tracking-[0.2em] text-white/55">
-            Independent Architecture Practice
-          </span>
-          <span className="text-[9px] tracking-[0.18em] text-[#c3d17a]">
-            ALIGARH · INDIA
-          </span>
-        </div>
+  const values = [
+    {
+      number: "01",
+      title: "Purposeful Design",
+      description:
+        "Every space begins with understanding how people live, work, and connect.",
+    },
+    {
+      number: "02",
+      title: "Attention to Detail",
+      description:
+        "We believe the smallest decisions can make the biggest difference to the finished space.",
+    },
+    {
+      number: "03",
+      title: "Lasting Quality",
+      description:
+        "Our approach balances aesthetics, functionality, and long-term value.",
+    },
+    {
+      number: "04",
+      title: "Client Collaboration",
+      description:
+        "We listen, exchange ideas, and work closely with clients throughout the process.",
+    },
+  ];
 
-        <div className="grid gap-10 pt-16 sm:pt-24 lg:grid-cols-[1.3fr_0.7fr] lg:items-end lg:gap-16 lg:pt-[12vh]">
-          <div>
-            <p className="about-intro-item mb-7 text-[10px] uppercase tracking-[0.2em] text-[#c3d17a]">
-              Who we are · Est. 2001
-            </p>
+  const featuredProjects = (projects || []).slice(0, 3);
 
-            <h1 className="about-intro-item max-w-[1000px] font-serif text-[clamp(3.7rem,9.5vw,9.5rem)] leading-[0.84] tracking-[-0.075em]">
-              Architecture
-              <br />
-              with a sense
-              <br />
-              <span className="pl-[8vw] italic text-[#c3d17a]">
-                of purpose.
-              </span>
-            </h1>
+  return (
+    <main ref={rootRef} className="overflow-hidden bg-white text-[#002556]">
+      {/* INTRO HERO */}
+      <section className="about-intro relative overflow-hidden bg-[#002556] px-5 pb-20 pt-36 text-white sm:px-8 sm:pb-28 sm:pt-44 lg:px-14 lg:pb-32 lg:pt-48">
+        <div className="pointer-events-none absolute -right-20 top-10 h-72 w-72 rounded-full bg-[#FEC73A]/10 blur-3xl sm:h-96 sm:w-96" />
+
+        <div className="relative mx-auto max-w-[1600px]">
+          <div className="about-reveal mb-16 flex items-center justify-between gap-6 sm:mb-20">
+            <Eyebrow light>About Shri Norris Architects</Eyebrow>
+
+            <span className="hidden text-[10px] uppercase tracking-[0.18em] text-white/45 sm:block">
+              Aligarh, India
+            </span>
           </div>
 
-          <div className="about-intro-item max-w-[380px] lg:justify-self-end lg:pb-3">
-            <span className="mb-6 block h-px w-14 bg-[#c3d17a]" />
+          <h1 className="max-w-[1200px] text-[clamp(3.5rem,10.5vw,10rem)] font-medium leading-[0.86] tracking-[-0.075em]">
+            <span className="about-reveal block">Spaces that</span>
 
-            <p className="text-sm leading-7 text-white/65 sm:text-base sm:leading-8">
-              A locally rooted architecture practice creating thoughtful
-              spaces for living, working and gathering in Aligarh and beyond.
+            <span className="about-reveal block">
+              <span className="text-[#FEC73A]">feel</span> different.
+            </span>
+          </h1>
+
+          <div className="mt-14 grid gap-10 sm:mt-20 sm:grid-cols-2 sm:items-end lg:grid-cols-12">
+            <p className="about-reveal max-w-md text-sm leading-7 text-white/70 sm:text-base sm:leading-8 lg:col-span-5">
+              We design architecture and interiors with a focus on people,
+              thoughtful details, and spaces that stand the test of time.
             </p>
 
-            <div className="mt-8 flex items-center gap-4 text-[9px] uppercase tracking-[0.16em] text-white/45">
-              <span className="grid h-10 w-10 place-items-center rounded-full border border-white/25">
-                ↓
-              </span>
-              <span>Scroll to discover our philosophy</span>
+            <div className="about-reveal flex items-center justify-start sm:justify-end lg:col-span-7">
+              <a
+                href="#our-story"
+                className="group inline-flex items-center gap-4 text-[10px] uppercase tracking-[0.18em] text-white transition-colors hover:text-[#FEC73A]"
+              >
+                Discover our story
+                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 transition-all duration-500 group-hover:border-[#FEC73A] group-hover:bg-[#FEC73A] group-hover:text-[#002556]">
+                  <ArrowDown
+                    size={16}
+                    className="transition-transform duration-500 group-hover:translate-y-1"
+                  />
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div className="about-line mt-16 h-px w-full bg-white/25 sm:mt-24" />
+
+          <div className="about-reveal mt-6 flex flex-wrap items-center justify-between gap-4 text-[9px] uppercase tracking-[0.18em] text-white/50 sm:text-[10px]">
+            <span>Architecture</span>
+            <span>Interior Design</span>
+            <span>Since 2001</span>
+          </div>
+        </div>
+      </section>
+
+      {/* OUR STORY */}
+      <section
+        id="our-story"
+        className="about-floating-section px-5 py-20 sm:px-8 sm:py-28 lg:px-14 lg:py-36"
+      >
+        <div className="mx-auto grid max-w-[1600px] gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <Eyebrow>Our Story</Eyebrow>
+
+            <h2 className="about-fade mt-7 max-w-xl text-4xl font-medium leading-[1.02] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
+              A vision built on{" "}
+              <span className="text-[#002556]/45">experience.</span>
+            </h2>
+
+            <div className="about-fade mt-9 max-w-md">
+              <p className="text-sm leading-7 text-[#002556]/70 sm:text-base sm:leading-8">
+                Shri Norris Architects has been shaping spaces since 2001. Our
+                work brings together practical thinking, considered design, and
+                an understanding of how a space should feel.
+              </p>
+
+              <p className="mt-5 text-sm leading-7 text-[#002556]/70 sm:text-base sm:leading-8">
+                From the first conversation to the final details, we believe
+                architecture should respond to its surroundings and the people
+                who experience it every day.
+              </p>
+            </div>
+
+            <div className="about-fade mt-9">
+              <CircleLink to="/contact">Start a conversation</CircleLink>
+            </div>
+          </div>
+
+          <div className="relative lg:col-span-7">
+            <div className="about-image-reveal relative h-[420px] overflow-hidden bg-[#002556] sm:h-[560px] lg:h-[680px]">
+              <img
+                src={aboutImg}
+                alt="Architectural project by Shri Norris Architects"
+                loading="lazy"
+                className="about-floating-image h-full w-full object-cover"
+                onError={(event) => {
+                  event.currentTarget.style.display = "none";
+                }}
+              />
+
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#002556]/45 via-transparent to-transparent" />
+
+              <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-white sm:bottom-8 sm:left-8 sm:right-8">
+                <div>
+                  <p className="text-[9px] uppercase tracking-[0.2em] text-white/70">
+                    Our approach
+                  </p>
+
+                  <p className="mt-2 text-xl tracking-[-0.04em] sm:text-3xl">
+                    Design with purpose.
+                  </p>
+                </div>
+
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#FEC73A] text-[#002556]">
+                  <ArrowUpRight size={19} />
+                </span>
+              </div>
+            </div>
+
+            <div className="about-fade mt-4 flex items-center justify-between gap-4 text-[9px] uppercase tracking-[0.16em] text-[#002556]/55">
+              <span>Thoughtful by design</span>
+              <span>Aligarh, India</span>
             </div>
           </div>
         </div>
+      </section>
 
-        <div className="about-intro-item mt-16 grid grid-cols-3 border-t border-white/15 pt-5 sm:mt-24">
-          <div>
-            <span className="block font-serif text-3xl sm:text-5xl">01</span>
-            <span className="mt-2 block text-[8px] tracking-[0.15em] text-white/45 sm:text-[9px]">
-              PEOPLE
-            </span>
+      {/* MILESTONES */}
+      <section className="bg-[#FEC73A] px-5 py-20 text-[#002556] sm:px-8 sm:py-28 lg:px-14 lg:py-36">
+        <div className="mx-auto max-w-[1600px]">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5">
+              <Eyebrow>Our Journey</Eyebrow>
+
+              <h2 className="about-fade mt-7 max-w-lg text-4xl font-medium leading-[1.02] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
+                Built over time.{" "}
+                <span className="text-[#002556]/50">Driven by ideas.</span>
+              </h2>
+
+              <p className="about-fade mt-7 max-w-md text-sm leading-7 text-[#002556]/75 sm:text-base sm:leading-8">
+                Every project has taught us something new. Our journey is shaped
+                by experience, collaboration, and the ambition to keep
+                improving.
+              </p>
+            </div>
+
+            <div className="lg:col-span-7">
+              {milestones.map((item) => (
+                <article
+                  key={item.number}
+                  className="about-fade border-t border-[#002556]/25 py-7 sm:py-9"
+                >
+                  <div className="grid gap-4 sm:grid-cols-[70px_1fr] sm:gap-7">
+                    <span className="text-[10px] tracking-[0.15em] text-[#002556]/60">
+                      {item.number}
+                    </span>
+
+                    <div>
+                      <div className="flex flex-wrap items-baseline justify-between gap-3">
+                        <h3 className="text-2xl font-medium tracking-[-0.05em] sm:text-4xl">
+                          {item.title}
+                        </h3>
+
+                        <span className="text-[10px] uppercase tracking-[0.16em] text-[#002556]/65">
+                          {item.year}
+                        </span>
+                      </div>
+
+                      <p className="mt-4 max-w-lg text-sm leading-7 text-[#002556]/75">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
-          <div className="border-l border-white/15 pl-4 sm:pl-8">
-            <span className="block font-serif text-3xl sm:text-5xl">02</span>
-            <span className="mt-2 block text-[8px] tracking-[0.15em] text-white/45 sm:text-[9px]">
-              PLACE
-            </span>
+        </div>
+      </section>
+
+      {/* VALUES */}
+      <section className="px-5 py-20 sm:px-8 sm:py-28 lg:px-14 lg:py-36">
+        <div className="mx-auto max-w-[1600px]">
+          <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+            <div>
+              <Eyebrow>What We Believe</Eyebrow>
+
+              <h2 className="about-fade mt-7 max-w-3xl text-4xl font-medium leading-[1.02] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
+                The principles behind{" "}
+                <span className="text-[#002556]/45">every space.</span>
+              </h2>
+            </div>
+
+            <p className="about-fade max-w-sm text-sm leading-7 text-[#002556]/65">
+              Good architecture is not only about how something looks. It is
+              about how it works, feels, and becomes part of everyday life.
+            </p>
           </div>
-          <div className="border-l border-white/15 pl-4 sm:pl-8">
-            <span className="block font-serif text-3xl sm:text-5xl">03</span>
-            <span className="mt-2 block text-[8px] tracking-[0.15em] text-white/45 sm:text-[9px]">
-              PURPOSE
-            </span>
+
+          <div className="mt-14 grid border-l border-t border-[#002556]/20 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
+            {values.map((value) => (
+              <article
+                key={value.number}
+                className="about-fade group relative flex min-h-[250px] flex-col justify-between border-b border-r border-[#002556]/20 p-6 transition-colors duration-500 hover:bg-[#002556] sm:min-h-[300px] sm:p-8"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <span className="text-[10px] tracking-[0.18em] text-[#002556]/55 transition-colors duration-500 group-hover:text-white/60">
+                    {value.number}
+                  </span>
+
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#002556]/20 transition-all duration-500 group-hover:rotate-45 group-hover:border-[#FEC73A] group-hover:bg-[#FEC73A]">
+                    <Plus
+                      size={15}
+                      className="text-[#002556] transition-colors duration-500 group-hover:text-[#002556]"
+                    />
+                  </span>
+                </div>
+
+                <div className="mt-12">
+                  <h3 className="text-xl font-medium tracking-[-0.04em] transition-colors duration-500 group-hover:text-white sm:text-2xl">
+                    {value.title}
+                  </h3>
+
+                  <p className="mt-4 text-sm leading-6 text-[#002556]/65 transition-colors duration-500 group-hover:text-white/70">
+                    {value.description}
+                  </p>
+                </div>
+
+                <span className="absolute bottom-0 left-0 h-[3px] w-0 bg-[#FEC73A] transition-all duration-500 group-hover:w-full" />
+              </article>
+            ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    {/* STORY */}
-    <section className="px-5 py-20 sm:px-8 sm:py-28 lg:px-[10vw] lg:py-[12vw]">
-      <div className="mb-12 flex items-center justify-between gap-4 sm:mb-16">
-        <p className="about-eyebrow text-[9px] uppercase tracking-[0.18em] text-[#777d52]">
-          01 — The studio
-        </p>
-        <span className="text-right text-[9px] tracking-[0.12em] text-black/40">
-          OUR STORY / OUR VALUES
-        </span>
-      </div>
-
-      <h2 className="about-story-reveal max-w-[1050px] font-serif text-[clamp(2.8rem,7.4vw,7.5rem)] leading-[0.94] tracking-[-0.07em]">
-        Good design begins
-        <br className="hidden sm:block" /> with{" "}
-        <span className="italic text-[#777d52]">listening.</span>
-      </h2>
-
-      <div className="mt-12 grid gap-8 sm:mt-16 md:grid-cols-[1.15fr_0.85fr] md:gap-14 lg:mt-20 lg:gap-20">
-        <div className="about-image image-zoom group relative aspect-[4/3] overflow-hidden bg-[#dedbd0] md:aspect-[4/4.5]">
-          <img
-            src={aboutimg}
-            alt="Carefully designed contemporary interior"
-            loading="lazy"
-            decoding="async"
-            className="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
-          />
-
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
-
-          <span className="absolute bottom-5 left-5 text-[9px] uppercase tracking-[0.16em] text-white/85 sm:bottom-7 sm:left-7">
-            Architecture / Material / Light
-          </span>
-
-          <span className="absolute right-5 top-5 grid h-10 w-10 place-items-center rounded-full border border-white/60 text-white">
-            ↗
-          </span>
-        </div>
-
-        <div className="flex flex-col justify-center md:py-8">
-          <p className="about-eyebrow text-[9px] uppercase tracking-[0.18em] text-[#777d52]">
-            A considered practice
-          </p>
-
-          <p className="about-story-reveal mt-6 font-serif text-2xl leading-snug tracking-[-0.035em] sm:text-3xl lg:text-4xl">
-            The best spaces don't ask for attention. They earn it.
-          </p>
-
-          <p className="about-story-reveal mt-6 text-sm leading-7 text-[#777970]">
-            Shri Norris Architects Aligarh has been working in architectural
-            design since 2001. We believe every successful project begins by
-            understanding the people, the site and the purpose behind the brief.
-          </p>
-
-          <p className="about-story-reveal mt-4 text-sm leading-7 text-[#777970]">
-            From homes and commercial spaces to interiors and planning
-            support, our aim is to create work that balances visual clarity
-            with real-world functionality. We value collaboration, thoughtful
-            decisions and attention to the details that make a space feel complete.
-          </p>
-
-          <Link
-            to="/contact"
-            className="about-story-reveal group mt-8 inline-flex w-fit items-center gap-4 border-b border-black/25 pb-3 text-xs font-medium transition-colors duration-300 hover:border-[#777d52] hover:text-[#777d52]"
-          >
-            DISCUSS YOUR PROJECT
-            <ArrowUpRight
-              size={16}
-              className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
-            />
-          </Link>
-        </div>
-      </div>
-    </section>
-
-    {/* APPROACH */}
-    <section className="about-approach bg-[#e7e5d9] px-5 py-20 sm:px-8 sm:py-28 lg:px-[10vw] lg:py-[10vw]">
-      <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-        <div>
-          <p className="about-eyebrow text-[9px] uppercase tracking-[0.18em] text-[#777d52]">
-            02 — Our approach
-          </p>
-
-          <h2 className="about-story-reveal mt-7 font-serif text-[clamp(3.5rem,7vw,7rem)] leading-[0.86] tracking-[-0.07em]">
-            From first
-            <br />
-            thought to
-            <br />
-            <span className="italic text-[#777d52]">lasting form.</span>
-          </h2>
-
-          <p className="about-story-reveal mt-7 max-w-[340px] text-sm leading-7 text-[#777970]">
-            Every stage is an opportunity to ask better questions, make
-            considered decisions and create spaces that work beautifully.
-          </p>
-        </div>
-
-        <div className="border-t border-black/20">
-          {[
-            {
-              number: "01",
-              title: "Listen",
-              description: "Understand your needs, aspirations and site.",
-            },
-            {
-              number: "02",
-              title: "Shape",
-              description: "Develop clear ideas into practical design.",
-            },
-            {
-              number: "03",
-              title: "Refine",
-              description: "Review details with care and consistency.",
-            },
-            {
-              number: "04",
-              title: "Realise",
-              description: "Support the journey from concept onwards.",
-            },
-          ].map((step) => (
-            <article
-              key={step.number}
-              className="about-step group grid grid-cols-[38px_1fr_24px] items-start gap-3 border-b border-black/20 py-7 sm:grid-cols-[55px_1fr_30px] sm:gap-5 sm:py-9"
-            >
-              <span className="pt-2 text-[10px] text-[#777d52]">
-                {step.number}
-              </span>
-
+      {/* FEATURED PROJECTS */}
+      {featuredProjects.length > 0 && (
+        <section className="bg-[#002556] px-5 py-20 text-white sm:px-8 sm:py-28 lg:px-14 lg:py-36">
+          <div className="mx-auto max-w-[1600px]">
+            <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
               <div>
-                <h3 className="font-serif text-3xl tracking-[-0.045em] transition-transform duration-500 group-hover:translate-x-2 sm:text-4xl lg:text-5xl">
-                  {step.title}
-                </h3>
-                <p className="mt-3 max-w-[350px] text-xs leading-6 text-[#777970] sm:text-sm">
-                  {step.description}
-                </p>
+                <Eyebrow light>Selected Work</Eyebrow>
+
+                <h2 className="about-fade mt-7 max-w-3xl text-4xl font-medium leading-[1.02] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
+                  Ideas turned into{" "}
+                  <span className="text-[#FEC73A]">spaces.</span>
+                </h2>
               </div>
 
-              <ArrowUpRight
-                size={19}
-                className="mt-2 text-[#777d52] transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1"
-              />
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* BELIEFS */}
-    <section className="about-beliefs px-5 py-20 sm:px-8 sm:py-28 lg:px-[10vw] lg:py-[11vw]">
-      <div className="mb-12 flex flex-col justify-between gap-6 sm:mb-16 md:flex-row md:items-end">
-        <div>
-          <p className="about-eyebrow text-[9px] uppercase tracking-[0.18em] text-[#777d52]">
-            03 — What guides us
-          </p>
-          <h2 className="about-story-reveal mt-7 font-serif text-[clamp(3.3rem,7vw,7rem)] leading-[0.88] tracking-[-0.07em]">
-            Principles over
-            <br />
-            <span className="italic text-[#777d52]">appearances.</span>
-          </h2>
-        </div>
-
-        <p className="max-w-[300px] text-sm leading-7 text-[#777970]">
-          The foundation of every project is a clear purpose, an open
-          conversation and respect for its surroundings.
-        </p>
-      </div>
-
-      <div className="grid border-t border-black/15 md:grid-cols-3">
-        {[
-          {
-            number: "01",
-            title: "People first.",
-            description:
-              "A place should respond to the routines, comfort and character of the people using it.",
-          },
-          {
-            number: "02",
-            title: "Purposeful design.",
-            description:
-              "Beauty and function work best together, with the site and context guiding decisions.",
-          },
-          {
-            number: "03",
-            title: "Care in the details.",
-            description:
-              "We aim to bring clarity, collaboration and considered attention to every brief.",
-          },
-        ].map((item) => (
-          <article
-            key={item.number}
-            className="about-belief-card group border-b border-black/15 py-8 md:border-b-0 md:border-r md:px-7 md:py-10 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
-          >
-            <div className="flex items-center justify-between">
-              <span className="text-[9px] tracking-[0.15em] text-[#777d52]">
-                {item.number} / PRINCIPLE
-              </span>
-              <ArrowUpRight
-                size={17}
-                className="transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1"
-              />
+              <Link
+                to="/projects"
+                className="group inline-flex w-fit items-center gap-4 border-b border-white/30 pb-3 text-[10px] uppercase tracking-[0.16em] transition-colors hover:border-[#FEC73A] hover:text-[#FEC73A]"
+              >
+                Explore all projects
+                <ArrowUpRight
+                  size={16}
+                  className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                />
+              </Link>
             </div>
 
-            <h3 className="mt-9 font-serif text-2xl tracking-[-0.04em] transition-colors duration-300 group-hover:text-[#777d52] sm:text-3xl">
-              {item.title}
-            </h3>
+            <div className="mt-14 grid gap-8 sm:mt-20 md:grid-cols-2 lg:grid-cols-3">
+              {featuredProjects.map((project, index) => (
+                <Link
+                  key={project.id || project.slug || project.title || index}
+                  to={`/projects/${project.slug || ""}`}
+                  className="about-fade group block"
+                >
+                  <div className="about-image-reveal relative aspect-[4/5] overflow-hidden bg-white/10">
+                    <img
+                      src={
+                        project.image ||
+                        project.thumbnail ||
+                        project.cover ||
+                        ""
+                      }
+                      alt={project.title || "Architecture project"}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.045]"
+                    />
 
-            <p className="mt-4 max-w-sm text-sm leading-7 text-[#777970]">
-              {item.description}
-            </p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#002556]/75 via-transparent to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
 
-            <div className="mt-8 h-px w-10 origin-left bg-[#777d52] transition-transform duration-500 group-hover:scale-x-[2.5]" />
-          </article>
-        ))}
-      </div>
-    </section>
+                    <span className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#FEC73A] text-[#002556] transition-transform duration-500 group-hover:rotate-45">
+                      <ArrowUpRight size={18} />
+                    </span>
 
-    {/* FINAL CTA */}
-    <div className="about-cta">
-      <CTASection />
-    </div>
-  </main>
-);
+                    <div className="absolute bottom-5 left-5 right-5 sm:bottom-7 sm:left-7 sm:right-7">
+                      <p className="text-[9px] uppercase tracking-[0.18em] text-white/65">
+                        Project {String(index + 1).padStart(2, "0")}
+                      </p>
 
+                      <h3 className="mt-2 text-2xl tracking-[-0.05em] sm:text-3xl">
+                        {project.title || "Selected Project"}
+                      </h3>
+
+                      {project.category && (
+                        <p className="mt-2 text-xs text-white/70">
+                          {project.category}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* TESTIMONIALS */}
+      {testimonials?.length > 0 && (
+        <section className="px-5 py-20 sm:px-8 sm:py-28 lg:px-14 lg:py-36">
+          <div className="mx-auto max-w-[1600px]">
+            <Eyebrow>Client Perspectives</Eyebrow>
+
+            <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-4">
+                <h2 className="about-fade text-4xl font-medium leading-[1.02] tracking-[-0.06em] sm:text-6xl">
+                  Trust is built{" "}
+                  <span className="text-[#002556]/45">together.</span>
+                </h2>
+              </div>
+
+              <div className="lg:col-span-8">
+                {testimonials.slice(0, 2).map((item, index) => (
+                  <article
+                    key={item.id || item.name || index}
+                    className="about-fade border-t border-[#002556]/20 py-8 sm:py-10"
+                  >
+                    <span className="text-4xl leading-none text-[#FEC73A]">
+                      “
+                    </span>
+
+                    <p className="mt-4 max-w-3xl text-xl leading-relaxed tracking-[-0.03em] sm:text-3xl">
+                      {item.quote ||
+                        item.text ||
+                        item.content ||
+                        "A thoughtful and collaborative experience from beginning to end."}
+                    </p>
+
+                    <div className="mt-7 flex flex-wrap items-center justify-between gap-3">
+                      <span className="text-xs font-medium">
+                        {item.name || item.author || "Our Client"}
+                      </span>
+
+                      <span className="text-[9px] uppercase tracking-[0.16em] text-[#002556]/50">
+                        {item.role || item.designation || "Client"}
+                      </span>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* FINAL CTA */}
+      <section className="relative overflow-hidden bg-[#FEC73A] px-5 py-20 text-[#002556] sm:px-8 sm:py-28 lg:px-14 lg:py-36">
+        <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full border border-[#002556]/10 sm:h-96 sm:w-96" />
+
+        <div className="relative mx-auto max-w-[1600px]">
+          <Eyebrow>Have a Project in Mind?</Eyebrow>
+
+          <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-8">
+              <h2 className="about-fade max-w-5xl text-5xl font-medium leading-[0.92] tracking-[-0.07em] sm:text-7xl lg:text-[7.5rem]">
+                Let’s create something{" "}
+                <span className="text-[#002556]/50">meaningful.</span>
+              </h2>
+            </div>
+
+            <div className="about-fade lg:col-span-4 lg:justify-self-end">
+              <Link
+                to="/contact"
+                className="group inline-flex items-center gap-5"
+              >
+                <span className="text-[10px] uppercase tracking-[0.18em]">
+                  Discuss your project
+                </span>
+
+                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#002556] text-white transition-all duration-500 group-hover:rotate-45 group-hover:bg-white group-hover:text-[#002556] sm:h-16 sm:w-16">
+                  <ArrowUpRight size={21} />
+                </span>
+              </Link>
+            </div>
+          </div>
+
+          <div className="about-line mt-14 h-px w-full bg-[#002556]/25 sm:mt-20" />
+
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-4 text-[9px] uppercase tracking-[0.18em] text-[#002556]/60">
+            <span>Shri Norris Architects</span>
+            <span>Architecture · Interior Design</span>
+            <span>Aligarh, India</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
 }
