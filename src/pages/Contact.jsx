@@ -440,10 +440,7 @@ export default function Contact() {
                 </p>
               )}
 
-              <p className="mt-5 text-[10px] leading-5 text-[#002556]/55">
-                This form opens WhatsApp and does not store submissions. Replace
-                the placeholder WhatsApp number before publishing.
-              </p>
+             
             </form>
           </div>
         </div>
