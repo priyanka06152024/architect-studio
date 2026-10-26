@@ -117,7 +117,7 @@ export function Header() {
             <img
               src={logo}
               alt="Shri Norris Architects Logo"
-              className="h-full w-full scale-[2.1] object-contain transition-transform duration-500 group-hover:scale-[1.7]"
+              className="h-full w-full scale-[1.5] object-contain transition-transform duration-500 group-hover:scale-[1.7]"
             />
           </span>
         </Link>
