@@ -157,13 +157,13 @@ export function Header() {
               color: "#FFFFFF",
               backgroundColor: "#002556",
             }}
-            className="header-action group inline-flex items-center gap-3 px-4 py-3 text-[10px] font-semibold uppercase tracking-[.12em] transition-colors duration-300 hover:!bg-[#FEC73A] hover:!text-[#002556] 2xl:px-5"
+            className="header-action group inline-flex items-center gap-3 px-4 py-3 text-[10px] font-semibold uppercase tracking-[.12em] !text-white transition-colors duration-300 hover:!bg-[#FEC73A] hover:!text-[#002556] 2xl:px-5"
           >
             <span>Let's talk</span>
 
             <ArrowUpRight
               size={15}
-              className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+              className="text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
             />
           </a>
         </div>
@@ -420,7 +420,6 @@ export function Footer() {
                   />
                 </Link>
               ))}
- 
             </div>
           </div>
 
