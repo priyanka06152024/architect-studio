@@ -10,7 +10,7 @@ import Contact from "./pages/Contact";
 import Testimonials from "./pages/Testimonials";
 import Team from "./pages/Team";
 import Certificates from "./pages/Certificates";
-import { Counters, Language } from "./pages/Extras";
+
 import { useState } from "react";
 import Preloader from "./components/Preloader";
 import ScrollAnimations from "./components/ScrollAnimations";
@@ -41,10 +41,6 @@ export default function App() {
           <Route path="testimonials" element={<Testimonials />} />
           <Route path="team" element={<Team />} />
           <Route path="certificates" element={<Certificates />} />
-          <Route path="counters" element={<Counters />} />
-          <Route path="website-counter" element={<Counters />} />
-          <Route path="visitor-hit-counter" element={<Counters />} />
-          <Route path="language" element={<Language />} />
           <Route path="*" element={<Home />} />
         </Route>
       </Routes>
