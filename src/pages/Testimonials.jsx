@@ -156,7 +156,7 @@ export default function Testimonials() {
 
   if (!total) {
     return (
-      <main className="bg-[#252620] px-5 py-32 text-[#f3f1e9] sm:px-8 lg:px-14">
+      <main className="bg-[#002556] px-5 py-32 text-[#FFFFFF] sm:px-8 lg:px-14">
         <h1 className="font-serif text-5xl">Client perspectives.</h1>
         <p className="mt-5 text-sm text-white/60">
           Client testimonials will appear here.
@@ -168,18 +168,18 @@ export default function Testimonials() {
   return (
     <main
       ref={pageRef}
-      className="overflow-hidden bg-[#f3f1e9] text-[#252620]"
+      className="overflow-hidden bg-[#FFFFFF] text-[#002556]"
     >
       {/* CINEMATIC HERO */}
-      <section className="relative flex min-h-[82svh] flex-col justify-between overflow-hidden bg-[#252620] px-5 pb-7 pt-32 text-[#f3f1e9] sm:px-8 sm:pb-10 sm:pt-36 lg:min-h-[92svh] lg:px-14 lg:pb-12 lg:pt-40">
+      <section className="relative flex min-h-[82svh] flex-col justify-between overflow-hidden bg-[#002556] px-5 pb-7 pt-32 text-[#FFFFFF] sm:px-8 sm:pb-10 sm:pt-36 lg:min-h-[92svh] lg:px-14 lg:pb-12 lg:pt-40">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute -right-32 top-[20%] size-[340px] rounded-full border border-white/[0.07] sm:size-[500px] lg:size-[680px]" />
           <div className="absolute -right-16 top-[27%] size-[220px] rounded-full border border-white/[0.07] sm:size-[370px] lg:size-[520px]" />
-          <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-[#c3cd91]/70 via-white/10 to-transparent" />
+          <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-[#FEC73A]/70 via-white/10 to-transparent" />
         </div>
 
         <div className="testi-topline relative z-10 flex items-center justify-between gap-4">
-          <p className="text-[10px] uppercase tracking-[0.23em] text-[#c3cd91] sm:text-xs">
+          <p className="text-[10px] uppercase tracking-[0.23em] text-[#FEC73A] sm:text-xs">
             Shri Norris Architects
           </p>
 
@@ -201,7 +201,7 @@ export default function Testimonials() {
             </span>
 
             <span className="block overflow-hidden pb-2">
-              <span className="testi-heading-line block italic text-[#c3cd91]">
+              <span className="testi-heading-line block italic text-[#FEC73A]">
                 intention.
               </span>
             </span>
@@ -222,10 +222,10 @@ export default function Testimonials() {
 
           <a
             href="#client-stories"
-            className="group inline-flex w-fit items-center gap-4 text-[10px] uppercase tracking-[0.18em] transition-colors duration-300 hover:text-[#c3cd91] sm:text-xs"
+            className="group inline-flex w-fit items-center gap-4 text-[10px] uppercase tracking-[0.18em] transition-colors duration-300 hover:text-[#FEC73A] sm:text-xs"
           >
             Explore client stories
-            <span className="flex size-10 items-center justify-center rounded-full border border-white/25 transition-all duration-500 group-hover:-rotate-45 group-hover:border-[#c3cd91] group-hover:bg-[#c3cd91] group-hover:text-[#252620]">
+            <span className="flex size-10 items-center justify-center rounded-full border border-white/25 transition-all duration-500 group-hover:-rotate-45 group-hover:border-[#FEC73A] group-hover:bg-[#FEC73A] group-hover:text-[#002556]">
               <ArrowDown size={15} strokeWidth={1.5} />
             </span>
           </a>
@@ -235,11 +235,11 @@ export default function Testimonials() {
       {/* IMMERSIVE TESTIMONIAL SLIDER */}
       <section
         id="client-stories"
-        className="bg-[#e9e7dc] px-5 py-16 sm:px-8 sm:py-24 lg:px-14 lg:py-28"
+        className="bg-[#FEC73A]/[0.10] px-5 py-16 sm:px-8 sm:py-24 lg:px-14 lg:py-28"
       >
         <div className="mb-12 flex flex-col justify-between gap-5 sm:mb-16 sm:flex-row sm:items-end">
           <div>
-            <p className="mb-4 text-[10px] uppercase tracking-[0.22em] text-[#777d52] sm:text-xs">
+            <p className="mb-4 text-[10px] uppercase tracking-[0.22em] text-[#002556]/70 sm:text-xs">
               The voices behind the work
             </p>
 
@@ -250,17 +250,17 @@ export default function Testimonials() {
             </h2>
           </div>
 
-          <p className="max-w-xs text-sm leading-7 text-[#252620]/60 sm:text-right sm:text-base">
+          <p className="max-w-xs text-sm leading-7 text-[#002556]/60 sm:text-right sm:text-base">
             Different people. Different perspectives. One shared experience
             of creating something meaningful.
           </p>
         </div>
 
-        <div className="testi-stage relative overflow-hidden bg-[#252620] text-[#f3f1e9]">
+        <div className="testi-stage relative overflow-hidden bg-[#002556] text-[#FFFFFF]">
           {/* TOP BAR */}
           <div className="flex items-center justify-between gap-4 border-b border-white/15 px-5 py-5 sm:px-8 lg:px-10">
             <div className="flex items-center gap-3">
-              <span className="size-2 rounded-full bg-[#c3cd91]" />
+              <span className="size-2 rounded-full bg-[#FEC73A]" />
               <span className="text-[9px] uppercase tracking-[0.2em] text-white/55 sm:text-[10px]">
                 Client testimonial
               </span>
@@ -287,7 +287,7 @@ export default function Testimonials() {
               <Quote
                 size={31}
                 strokeWidth={1.2}
-                className="mb-8 text-[#c3cd91] sm:mb-10 sm:size-10"
+                className="mb-8 text-[#FEC73A] sm:mb-10 sm:size-10"
               />
 
               <blockquote className="max-w-5xl flex-1">
@@ -307,7 +307,7 @@ export default function Testimonials() {
                   </p>
                 </div>
 
-                <p className="text-[9px] uppercase tracking-[0.2em] text-[#c3cd91] sm:text-[10px]">
+                <p className="text-[9px] uppercase tracking-[0.2em] text-[#FEC73A] sm:text-[10px]">
                   Shri Norris / Client voices
                 </p>
               </div>
@@ -318,7 +318,7 @@ export default function Testimonials() {
           <div className="border-t border-white/15 px-5 py-5 sm:px-8 sm:py-6 lg:px-10">
             <div className="mb-5 h-px w-full bg-white/10">
               <div
-                className="h-full bg-[#c3cd91] transition-[width] duration-500 ease-out"
+                className="h-full bg-[#FEC73A] transition-[width] duration-500 ease-out"
                 style={{
                   width: `${((activeIndex + 1) / total) * 100}%`,
                 }}
@@ -337,8 +337,8 @@ export default function Testimonials() {
                     aria-pressed={activeIndex === index}
                     className={`h-8 min-w-8 px-2 text-[10px] transition-all duration-300 sm:h-9 sm:min-w-9 ${
                       activeIndex === index
-                        ? "bg-[#c3cd91] text-[#252620]"
-                        : "border border-white/15 text-white/55 hover:border-white/50 hover:text-white"
+                        ? "bg-[#FEC73A] text-[#002556]"
+                        : "border border-white/15 text-white/55 hover:border-[#FEC73A] hover:text-[#FEC73A]"
                     }`}
                   >
                     {String(index + 1).padStart(2, "0")}
@@ -352,7 +352,7 @@ export default function Testimonials() {
                   onClick={() => goTo(activeIndex - 1)}
                   disabled={activeIndex === 0 || isAnimating}
                   aria-label="Previous testimonial"
-                  className="flex size-10 items-center justify-center border border-white/20 transition-all duration-300 hover:border-[#c3cd91] hover:bg-[#c3cd91] hover:text-[#252620] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-white/20 disabled:hover:bg-transparent disabled:hover:text-white sm:size-12"
+                  className="flex size-10 items-center justify-center border border-white/20 transition-all duration-300 hover:border-[#FEC73A] hover:bg-[#FEC73A] hover:text-[#002556] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-white/20 disabled:hover:bg-transparent disabled:hover:text-white sm:size-12"
                 >
                   <ArrowLeft size={17} strokeWidth={1.4} />
                 </button>
@@ -362,7 +362,7 @@ export default function Testimonials() {
                   onClick={() => goTo(activeIndex + 1)}
                   disabled={activeIndex === total - 1 || isAnimating}
                   aria-label="Next testimonial"
-                  className="flex size-10 items-center justify-center border border-white/20 transition-all duration-300 hover:border-[#c3cd91] hover:bg-[#c3cd91] hover:text-[#252620] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-white/20 disabled:hover:bg-transparent disabled:hover:text-white sm:size-12"
+                  className="flex size-10 items-center justify-center border border-white/20 transition-all duration-300 hover:border-[#FEC73A] hover:bg-[#FEC73A] hover:text-[#002556] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-white/20 disabled:hover:bg-transparent disabled:hover:text-white sm:size-12"
                 >
                   <ArrowRight size={17} strokeWidth={1.4} />
                 </button>
@@ -372,14 +372,14 @@ export default function Testimonials() {
         </div>
 
         {/* BOTTOM EDITORIAL STRIP */}
-        <div className="testi-bottom-copy mt-8 flex flex-col justify-between gap-4 border-t border-[#252620]/20 pt-6 sm:flex-row sm:items-center">
-          <p className="text-xs leading-6 text-[#252620]/55">
+        <div className="testi-bottom-copy mt-8 flex flex-col justify-between gap-4 border-t border-[#002556]/20 pt-6 sm:flex-row sm:items-center">
+          <p className="text-xs leading-6 text-[#002556]/55">
             Thoughtful spaces. Honest experiences.
           </p>
 
           <a
             href="/contact"
-            className="group inline-flex w-fit items-center gap-3 text-[10px] uppercase tracking-[0.17em] text-[#252620] transition-colors duration-300 hover:text-[#777d52] sm:text-xs"
+            className="group inline-flex w-fit items-center gap-3 text-[10px] uppercase tracking-[0.17em] text-[#002556] transition-colors duration-300 hover:text-[#b38600] sm:text-xs"
           >
             Start a conversation
             <ArrowUpRight
