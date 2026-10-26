@@ -152,7 +152,7 @@ export function Header() {
 
         <div className="hidden xl:block">
           <a
-            href="tel:+910000000000"
+            href="tel:+918279646809"
             style={{
               color: "#FFFFFF",
               backgroundColor: "#002556",
@@ -227,6 +227,10 @@ export function Header() {
 
             <a
               href="tel:+910000000000"
+                style={{
+              color: "#FFFFFF",
+              backgroundColor: "#002556",
+            }}
               className="mt-5 flex items-center justify-between bg-[#002556] px-5 py-4 text-sm text-white transition-colors duration-300 hover:bg-[#FEC73A] hover:text-[#002556]"
             >
               <span>Let's discuss your project</span>
