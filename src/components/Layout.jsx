@@ -12,7 +12,7 @@ import {
 import { FaInstagram } from "react-icons/fa";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import logo from "../assets/images/Shri Norris Architects Logo 1.webp"
+import logo from "../assets/images/Shri Norris Architects Logo 1.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -109,18 +109,18 @@ export function Header() {
     >
       <div className="container-shell flex min-h-[78px] items-center justify-between gap-4">
         <Link
-  to="/"
-  className="header-brand group flex shrink-0 items-center gap-3"
-  onClick={() => setOpen(false)}
->
-  <span className="relative grid h-17 w-20 shrink-0 place-items-center overflow-hidden">
-    <img
-      src={logo}
-      alt="Shri Norris Architects Logo"
-      className="h-full w-full scale-[2.2] object-contain transition-transform duration-500 group-hover:scale-[1.7]"
-    />
-  </span>
-</Link>
+          to="/"
+          className="header-brand group flex shrink-0 items-center gap-3"
+          onClick={() => setOpen(false)}
+        >
+          <span className="relative grid h-18 w-22 shrink-0 place-items-center overflow-hidden">
+            <img
+              src={logo}
+              alt="Shri Norris Architects Logo"
+              className="h-full w-full scale-[2.1] object-contain transition-transform duration-500 group-hover:scale-[1.7]"
+            />
+          </span>
+        </Link>
 
         <nav className="hidden items-center gap-x-4 gap-y-2 xl:flex 2xl:gap-x-5">
           {nav.map(([label, to]) => (
@@ -150,23 +150,23 @@ export function Header() {
           ))}
         </nav>
 
-    <div className="hidden xl:block">
-  <a
-    href="tel:+910000000000"
-    style={{
-      color: "#FFFFFF",
-      backgroundColor: "#002556",
-    }}
-    className="header-action group inline-flex items-center gap-3 px-4 py-3 text-[10px] font-semibold uppercase tracking-[.12em] transition-colors duration-300 hover:!bg-[#FEC73A] hover:!text-[#002556] 2xl:px-5"
-  >
-    <span>Let's talk</span>
+        <div className="hidden xl:block">
+          <a
+            href="tel:+910000000000"
+            style={{
+              color: "#FFFFFF",
+              backgroundColor: "#002556",
+            }}
+            className="header-action group inline-flex items-center gap-3 px-4 py-3 text-[10px] font-semibold uppercase tracking-[.12em] transition-colors duration-300 hover:!bg-[#FEC73A] hover:!text-[#002556] 2xl:px-5"
+          >
+            <span>Let's talk</span>
 
-    <ArrowUpRight
-      size={15}
-      className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-    />
-  </a>
-</div>
+            <ArrowUpRight
+              size={15}
+              className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+            />
+          </a>
+        </div>
 
         <button
           type="button"
@@ -343,37 +343,46 @@ export function Footer() {
         {/* Footer columns */}
         <div className="grid gap-12 py-14 sm:grid-cols-2 md:gap-10 md:py-16 lg:grid-cols-[1.1fr_.8fr_1fr]">
           <div className="footer-reveal">
-            <Link to="/" className="group inline-flex items-center gap-3">
-              <span className="grid h-12 w-12 place-items-center border border-white/40 font-display text-2xl transition-colors duration-300 group-hover:border-[#FEC73A] group-hover:bg-[#FEC73A] group-hover:text-[#002556]">
-                N<span className="text-[#FEC73A]">.</span>
-              </span>
-              <span>
-                <span className="block font-display text-sm font-bold tracking-[.12em]">
-                  SHRI NORRIS
-                </span>
-                <span className="mt-1.5 block text-[9px] tracking-[.23em] text-white/50">
-                  ARCHITECTS · ALIGARH
-                </span>
-              </span>
+            {/* Premium Logo Card */}
+
+            {/* Circular Architectural Logo */}
+
+            <Link
+              to="/"
+              onClick={() => setOpen(false)}
+              aria-label="Shri Norris Architects home"
+              className="group relative  flex h-[90px] w-[90px] shrink-0 items-center justify-center rounded-full bg-white  transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(254,199,58,0.2)] sm:h-[100px] sm:w-[100px]"
+            >
+              {/* Outer gold ring */}
+              <span className="pointer-events-none absolute inset-0 rounded-full border border-[#FEC73A]/70 transition-all duration-500 group-hover:inset-[-5px] group-hover:border-[#FEC73A]" />
+
+              {/* Inner fine ring */}
+              <span className="pointer-events-none absolute inset-[6px] rounded-full border border-[#002556]/10" />
+
+              {/* Logo */}
+              <img
+                src={logo}
+                alt="Shri Norris Architects"
+                className="relative z-10 h-full w-full rounded-full object-contain transition-transform duration-500 group-hover:scale-[1]"
+              />
             </Link>
 
             <p className="mt-6 max-w-xs text-sm leading-7 text-white/55">
               Thoughtful architecture, considered interiors and spaces shaped
               around the way people live.
             </p>
-
             <div className="mt-7 flex gap-2">
               <a
                 aria-label="Call the studio"
                 className="group grid h-11 w-11 place-items-center border border-white/20 transition-all duration-300 hover:-translate-y-1 hover:border-[#FEC73A] hover:bg-[#FEC73A] hover:text-[#002556]"
-                href="tel:+910000000000"
+                href="tel:+918279646809"
               >
                 <Phone size={16} />
               </a>
               <a
                 aria-label="Contact on WhatsApp"
                 className="group grid h-11 w-11 place-items-center border border-white/20 transition-all duration-300 hover:-translate-y-1 hover:border-[#FEC73A] hover:bg-[#FEC73A] hover:text-[#002556]"
-                href="https://wa.me/910000000000"
+                href="https://wa.me/+918279646809"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -411,25 +420,7 @@ export function Footer() {
                   />
                 </Link>
               ))}
-
-              <Link
-                to="/counters"
-                className="border-b border-white/10 py-3 text-[12px] text-white/60 transition-colors hover:text-[#FEC73A]"
-              >
-                Website Counter
-              </Link>
-              <Link
-                to="/counters"
-                className="border-b border-white/10 py-3 text-[12px] text-white/60 transition-colors hover:text-[#FEC73A]"
-              >
-                Visitor Hit Counter
-              </Link>
-              <Link
-                to="/language"
-                className="border-b border-white/10 py-3 text-[12px] text-white/60 transition-colors hover:text-[#FEC73A]"
-              >
-                Language
-              </Link>
+ 
             </div>
           </div>
 
@@ -512,7 +503,7 @@ export function FloatingActions() {
       className="fixed bottom-5 right-4 z-40 flex flex-col gap-3 sm:bottom-7 sm:right-7"
     >
       <a
-        href="tel:+910000000000"
+        href="tel:+918279646809"
         aria-label="Call now"
         className="floating-action group relative grid h-12 w-12 place-items-center rounded-full border border-white/15 bg-[#002556] text-white shadow-lg shadow-black/10 transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-[#FEC73A] hover:text-[#002556] sm:h-[50px] sm:w-[50px]"
       >
@@ -526,7 +517,7 @@ export function FloatingActions() {
       </a>
 
       <a
-        href="https://wa.me/910000000000"
+        href="https://wa.me/918279646809"
         target="_blank"
         rel="noreferrer"
         aria-label="WhatsApp now"

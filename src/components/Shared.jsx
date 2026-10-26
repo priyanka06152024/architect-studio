@@ -101,3 +101,25 @@ export function CTASection() {
     </section>
   );
 }
+
+
+export const handleWhatsAppEnquiry = (e) => {
+  e.preventDefault();
+
+  const phoneNumber = "918279646809 ";
+
+  const message = `
+Hello Shri Norris Architects,
+
+I would like to enquire about your services.
+
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+Enquiry: ${enquiry}
+  `.trim();
+
+  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+  window.open(whatsappURL, "_blank", "noopener,noreferrer");
+};

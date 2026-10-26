@@ -273,7 +273,7 @@ export default function Contact() {
                     href="tel:+910000000000"
                     className="mt-3 inline-block text-sm transition-colors duration-300 hover:text-[#b38600]"
                   >
-                    +918279646809
+                    +918279646809,+918171646809 
                   </a>
                 </div>
               </div>
