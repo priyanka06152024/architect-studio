@@ -1,4 +1,3 @@
-
 import { useLayoutEffect, useRef } from "react";
 import {
   FileCheck2,
@@ -102,24 +101,39 @@ export default function Certificates() {
   }, []);
 
   return (
-    <main
-      ref={pageRef}
-      className="overflow-hidden bg-white text-[#002556]"
-    >
+    <main ref={pageRef} className="overflow-hidden bg-white text-[#002556]">
       {/* HERO */}
-      <section className="relative flex min-h-[76svh] flex-col justify-between bg-[#002556] px-5 pb-8 pt-32 text-white sm:px-8 sm:pb-10 sm:pt-36 lg:min-h-[82svh] lg:px-14 lg:pb-12 lg:pt-40">
-        <div className="flex items-center justify-between gap-4">
+
+      <section className="group relative isolate flex min-h-[76svh] flex-col justify-between overflow-hidden px-5 pb-8 pt-32 text-white sm:px-8 sm:pb-10 sm:pt-36 lg:min-h-[82svh] lg:px-14 lg:pb-12 lg:pt-40">
+        {/* Background Image */}
+        <div className="absolute inset-0 -z-20">
+          <img
+            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2400&q=90"
+            alt="Contemporary architectural space"
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
+
+        {/* Normal Dark Overlay */}
+        <div className="absolute inset-0 -z-10 bg-black/40" />
+
+        {/* Subtle Blue Tint on Hover */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-[#002556]/0 transition-colors duration-700 ease-in-out group-hover:bg-[#002556]/25" />
+
+        {/* Top Labels */}
+        <div className="relative z-10 flex items-center justify-between gap-4">
           <p className="cert-hero-label text-[10px] uppercase tracking-[0.24em] text-[#FEC73A] sm:text-xs">
             Shri Norris Architects
           </p>
 
-          <p className="cert-hero-label text-[10px] uppercase tracking-[0.18em] text-white/65 sm:text-xs">
+          <p className="cert-hero-label text-[10px] uppercase tracking-[0.18em] text-white/75 sm:text-xs">
             Official Documentation
           </p>
         </div>
 
-        <div className="py-16 sm:py-20 lg:py-24">
-          <p className="mb-5 text-xs uppercase tracking-[0.2em] text-white/65 sm:mb-7">
+        {/* Main Heading */}
+        <div className="relative z-10 py-16 sm:py-20 lg:py-24">
+          <p className="mb-5 text-xs uppercase tracking-[0.2em] text-white/75 sm:mb-7">
             Registered with purpose
           </p>
 
@@ -130,19 +144,19 @@ export default function Certificates() {
           </h1>
         </div>
 
-        <div className="cert-hero-bottom grid grid-cols-1 gap-6 border-t border-white/25 pt-6 sm:grid-cols-[1fr_auto] sm:items-end sm:gap-10 sm:pt-8">
-          <p className="max-w-md text-sm leading-7 text-white/75 sm:text-base sm:leading-8">
-            Our Udyam Registration Certificate reflects our formal
-            registration under India's MSME framework.
+        {/* Bottom Content */}
+        <div className="cert-hero-bottom relative z-10 grid grid-cols-1 gap-6 border-t border-white/25 pt-6 sm:grid-cols-[1fr_auto] sm:items-end sm:gap-10 sm:pt-8">
+          <p className="max-w-md text-sm leading-7 text-white/85 sm:text-base sm:leading-8">
+            Our Udyam Registration Certificate reflects our formal registration
+            under India's MSME framework.
           </p>
 
           <a
             href="#certificate"
-            className="group inline-flex w-fit items-center gap-4 text-[10px] uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:text-[#FEC73A] sm:text-xs"
+            className="group/link inline-flex w-fit items-center gap-4 text-[10px] uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:text-[#FEC73A] sm:text-xs"
           >
             View certificate
-
-            <span className="flex size-10 items-center justify-center rounded-full border border-white/35 transition-all duration-500 group-hover:-rotate-45 group-hover:border-[#FEC73A] group-hover:bg-[#FEC73A] group-hover:text-[#002556]">
+            <span className="flex size-10 items-center justify-center rounded-full border border-white/40 transition-all duration-500 group-hover/link:-rotate-45 group-hover/link:border-[#FEC73A] group-hover/link:bg-[#FEC73A] group-hover/link:text-[#002556]">
               <ArrowDown size={15} strokeWidth={1.5} />
             </span>
           </a>
@@ -167,8 +181,8 @@ export default function Certificates() {
           </div>
 
           <p className="max-w-sm text-sm leading-7 text-[#002556]/70 sm:text-right sm:text-base">
-            Our official registration document, presented with clarity
-            and transparency.
+            Our official registration document, presented with clarity and
+            transparency.
           </p>
         </div>
 
@@ -188,9 +202,9 @@ export default function Certificates() {
             </h3>
 
             <p className="mt-5 max-w-md text-sm leading-7 text-[#002556]/70 sm:text-base sm:leading-8">
-              This certificate documents the Udyam registration of Shri
-              Norris Architects. The original document is available to
-              view in full size.
+              This certificate documents the Udyam registration of Shri Norris
+              Architects. The original document is available to view in full
+              size.
             </p>
 
             <div className="mt-8 border-t border-[#002556]/15 pt-5">
@@ -202,9 +216,7 @@ export default function Certificates() {
                 />
 
                 <div>
-                  <p className="text-sm font-medium">
-                    Official documentation
-                  </p>
+                  <p className="text-sm font-medium">Official documentation</p>
                   <p className="mt-1 text-xs leading-6 text-[#002556]/60">
                     Refer to the original certificate for its official
                     registration details.
@@ -287,9 +299,9 @@ export default function Certificates() {
             </h3>
 
             <p className="mt-2 max-w-3xl text-sm leading-7 text-[#002556]/70">
-              We believe in presenting official documentation clearly.
-              Select the certificate preview to inspect the original
-              image at full size.
+              We believe in presenting official documentation clearly. Select
+              the certificate preview to inspect the original image at full
+              size.
             </p>
           </div>
         </div>
@@ -315,7 +327,6 @@ export default function Certificates() {
             className="group inline-flex w-fit shrink-0 items-center gap-5 border-b border-[#002556]/35 pb-3 text-xs uppercase tracking-[0.16em] transition-colors duration-300 hover:border-[#FEC73A] hover:text-[#002556]/65 sm:text-sm"
           >
             Get in touch
-
             <span className="flex size-10 items-center justify-center rounded-full border border-[#002556]/25 transition-all duration-500 group-hover:rotate-45 group-hover:border-[#FEC73A] group-hover:bg-[#FEC73A] group-hover:text-[#002556]">
               <ArrowUpRight size={17} strokeWidth={1.5} />
             </span>

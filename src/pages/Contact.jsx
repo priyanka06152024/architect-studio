@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {handleWhatsAppEnquiry} from "../components/Shared.jsx";
+import { handleWhatsAppEnquiry } from "../components/Shared.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -147,22 +147,37 @@ export default function Contact() {
   return (
     <main ref={pageRef} className="overflow-hidden bg-[#FFFFFF] text-[#002556]">
       {/* CINEMATIC HERO */}
-      <section className="relative flex min-h-[78svh] flex-col justify-between overflow-hidden bg-[#002556] px-5 pb-8 pt-32 text-[#FFFFFF] sm:px-8 sm:pb-10 sm:pt-36 lg:min-h-[86svh] lg:px-14 lg:pb-12 lg:pt-40">
-        <div className="pointer-events-none absolute -right-24 top-[18%] size-[300px] rounded-full border border-white/[0.07] sm:size-[460px] lg:size-[620px]" />
-        <div className="pointer-events-none absolute -right-10 top-[25%] size-[200px] rounded-full border border-white/[0.07] sm:size-[340px] lg:size-[470px]" />
 
+      <section className="group relative isolate flex min-h-[78svh] flex-col justify-between overflow-hidden px-5 pb-8 pt-32 text-[#FFFFFF] sm:px-8 sm:pb-10 sm:pt-36 lg:min-h-[86svh] lg:px-14 lg:pb-12 lg:pt-40">
+        {/* Background Image */}
+        <div className="absolute inset-0 -z-20">
+          <img
+            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=90"
+            alt="Contemporary architectural interior"
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
+
+        {/* Normal Dark Overlay */}
+        <div className="absolute inset-0 -z-10 bg-black/40" />
+
+        {/* Subtle Blue Tint on Hover */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-[#002556]/0 transition-colors duration-700 ease-in-out group-hover:bg-[#002556]/25" />
+
+        {/* Top Labels */}
         <div className="contact-topline relative z-10 flex items-center justify-between gap-4">
           <p className="text-[10px] uppercase tracking-[0.23em] text-[#FEC73A] sm:text-xs">
             Shri Norris Architects
           </p>
 
-          <p className="text-[10px] uppercase tracking-[0.18em] text-white/40 sm:text-xs">
+          <p className="text-[10px] uppercase tracking-[0.18em] text-white/70 sm:text-xs">
             New project / Get in touch
           </p>
         </div>
 
+        {/* Main Heading */}
         <div className="relative z-10 py-16 sm:py-20 lg:py-24">
-          <p className="mb-6 text-[10px] uppercase tracking-[0.22em] text-white/45 sm:text-xs">
+          <p className="mb-6 text-[10px] uppercase tracking-[0.22em] text-white/75 sm:text-xs">
             Let's talk about your project
           </p>
 
@@ -183,18 +198,19 @@ export default function Contact() {
           </h1>
         </div>
 
-        <div className="contact-hero-bottom relative z-10 flex flex-col justify-between gap-6 border-t border-white/15 pt-6 sm:flex-row sm:items-end sm:pt-8">
-          <p className="max-w-lg text-sm leading-7 text-white/60 sm:text-base sm:leading-8">
+        {/* Bottom Content */}
+        <div className="contact-hero-bottom relative z-10 flex flex-col justify-between gap-6 border-t border-white/25 pt-6 sm:flex-row sm:items-end sm:pt-8">
+          <p className="max-w-lg text-sm leading-7 text-white/85 sm:text-base sm:leading-8">
             Tell us a little about what you're planning. We'll use your brief to
             understand the project and the support you need.
           </p>
 
           <a
             href="#contact-details"
-            className="group inline-flex w-fit items-center gap-4 text-[10px] uppercase tracking-[0.18em] transition-colors duration-300 hover:text-[#FEC73A] sm:text-xs"
+            className="group/link inline-flex w-fit items-center gap-4 text-[10px] uppercase tracking-[0.18em] transition-colors duration-300 hover:text-[#FEC73A] sm:text-xs"
           >
             Start a conversation
-            <span className="flex size-10 items-center justify-center rounded-full border border-white/25 transition-all duration-500 group-hover:-rotate-45 group-hover:border-[#FEC73A] group-hover:bg-[#FEC73A] group-hover:text-[#002556]">
+            <span className="flex size-10 items-center justify-center rounded-full border border-white/40 transition-all duration-500 group-hover/link:-rotate-45 group-hover/link:border-[#FEC73A] group-hover/link:bg-[#FEC73A] group-hover/link:text-[#002556]">
               <ArrowDown size={15} strokeWidth={1.5} />
             </span>
           </a>
@@ -273,7 +289,7 @@ export default function Contact() {
                     href="tel:+910000000000"
                     className="mt-3 inline-block text-sm transition-colors duration-300 hover:text-[#b38600]"
                   >
-                    +918279646809,+918171646809 
+                    +918279646809,+918171646809
                   </a>
                 </div>
               </div>
@@ -439,8 +455,6 @@ export default function Contact() {
                   message there to complete your enquiry.
                 </p>
               )}
-
-             
             </form>
           </div>
         </div>
@@ -448,5 +462,3 @@ export default function Contact() {
     </main>
   );
 }
-
-

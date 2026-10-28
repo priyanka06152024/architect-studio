@@ -1,4 +1,3 @@
-
 // src/pages/Gallery.jsx
 
 import { useLayoutEffect, useRef, useState } from "react";
@@ -29,7 +28,7 @@ export default function Gallery() {
 
     const ctx = gsap.context(() => {
       const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
+        "(prefers-reduced-motion: reduce)",
       ).matches;
 
       if (reduceMotion) return;
@@ -54,7 +53,7 @@ export default function Gallery() {
             duration: 1.1,
             stagger: 0.13,
           },
-          "-=0.35"
+          "-=0.35",
         )
         .from(
           ".gallery-hero-description",
@@ -63,7 +62,7 @@ export default function Gallery() {
             opacity: 0,
             duration: 0.8,
           },
-          "-=0.55"
+          "-=0.55",
         )
         .from(
           ".gallery-hero-bottom",
@@ -72,7 +71,7 @@ export default function Gallery() {
             opacity: 0,
             duration: 0.65,
           },
-          "-=0.4"
+          "-=0.4",
         );
 
       gsap.utils.toArray(".gallery-reveal").forEach((element) => {
@@ -140,43 +139,55 @@ export default function Gallery() {
   }, []);
 
   return (
-    <main
-      ref={pageRef}
-      className="overflow-clip bg-white text-[#002556]"
-    >
+    <main ref={pageRef} className="overflow-clip bg-white text-[#002556]">
       {/* HERO */}
-      <section className="relative flex min-h-[82svh] flex-col justify-between overflow-hidden bg-[#002556] px-5 pb-8 pt-28 text-white sm:px-8 sm:pb-10 sm:pt-32 lg:min-h-[88svh] lg:px-14 lg:pb-12 lg:pt-36">
-        {/* Background detail */}
+
+      <section className="group relative isolate flex min-h-[82svh] flex-col justify-between overflow-hidden px-5 pb-8 pt-28 text-white sm:px-8 sm:pb-10 sm:pt-32 lg:min-h-[88svh] lg:px-14 lg:pb-12 lg:pt-36">
+        {/* BACKGROUND ARCHITECTURE IMAGE */}
+        <div className="absolute inset-0 -z-20">
+          <img
+            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=90"
+            alt="Contemporary architectural design"
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
+
+        {/* NATURAL DARK OVERLAY */}
+        <div className="absolute inset-0 -z-10 bg-black/40" />
+
+        {/* SOFT BLUE CORNERS ON HOVER */}
         <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-24 top-20 h-72 w-72 rounded-full border border-white/[0.12] sm:h-[26rem] sm:w-[26rem] lg:right-8 lg:top-12 lg:h-[38rem] lg:w-[38rem]"
+          className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
+          style={{
+            background: `
+        radial-gradient(ellipse at top left, rgba(0,37,86,0.42), transparent 58%),
+        radial-gradient(ellipse at top right, rgba(0,37,86,0.32), transparent 55%),
+        radial-gradient(ellipse at bottom left, rgba(0,37,86,0.42), transparent 60%),
+        radial-gradient(ellipse at bottom right, rgba(0,37,86,0.35), transparent 58%)
+      `,
+          }}
         />
 
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-10 top-36 h-52 w-52 rounded-full border border-[#FEC73A]/25 sm:h-80 sm:w-80 lg:right-28 lg:top-28 lg:h-[30rem] lg:w-[30rem]"
-        />
-
+        {/* TOP HEADER */}
         <div className="relative z-10 flex items-center justify-between gap-4">
           <p className="gallery-hero-eyebrow text-[10px] uppercase tracking-[0.24em] text-[#FEC73A] sm:text-xs">
             Shri Norris Architects
           </p>
 
-          <p className="gallery-hero-eyebrow hidden text-[10px] uppercase tracking-[0.2em] text-white/55 sm:block">
+          <p className="gallery-hero-eyebrow hidden text-[10px] uppercase tracking-[0.2em] text-white/80 sm:block">
             Architecture · Interiors · Spaces
           </p>
         </div>
 
+        {/* MAIN HEADING */}
         <div className="relative z-10 my-20 lg:my-24">
-          <p className="gallery-hero-eyebrow mb-6 text-[10px] uppercase tracking-[0.24em] text-white/60 sm:mb-8 sm:text-xs">
+          <p className="gallery-hero-eyebrow mb-6 text-[10px] uppercase tracking-[0.24em] text-white/75 sm:mb-8 sm:text-xs">
             Selected work / 01—{String(projects.length).padStart(2, "0")}
           </p>
 
           <h1 className="max-w-[1100px] font-serif text-[clamp(3.8rem,10.5vw,9.5rem)] leading-[0.83] tracking-[-0.075em]">
             <span className="block overflow-hidden pb-2">
-              <span className="gallery-hero-line block">
-                Spaces with
-              </span>
+              <span className="gallery-hero-line block">Spaces with</span>
             </span>
 
             <span className="block overflow-hidden pb-3">
@@ -186,26 +197,24 @@ export default function Gallery() {
             </span>
 
             <span className="block overflow-hidden pb-3">
-              <span className="gallery-hero-line block">
-                view.
-              </span>
+              <span className="gallery-hero-line block">view.</span>
             </span>
           </h1>
         </div>
 
-        <div className="gallery-hero-bottom relative z-10 flex flex-col gap-7 border-t border-white/20 pt-6 sm:flex-row sm:items-end sm:justify-between sm:pt-7">
-          <p className="gallery-hero-description max-w-md text-sm leading-7 text-white/70 sm:text-base sm:leading-8">
+        {/* BOTTOM DESCRIPTION — NO BORDER LINE */}
+        <div className="gallery-hero-bottom relative z-10 flex flex-col gap-7 pt-6 sm:flex-row sm:items-end sm:justify-between sm:pt-7">
+          <p className="gallery-hero-description max-w-md text-sm leading-7 text-white/85 sm:text-base sm:leading-8">
             A considered collection of architectural ideas, material
             explorations and spaces designed around the way we live.
           </p>
 
           <a
             href="#selected-projects"
-            className="group inline-flex w-fit items-center gap-4 text-[10px] uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-[#FEC73A]"
+            className="group/link inline-flex w-fit items-center gap-4 text-[10px] uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-[#FEC73A]"
           >
             Explore the work
-
-            <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 transition-all duration-500 group-hover:rotate-[-45deg] group-hover:border-[#FEC73A] group-hover:bg-[#FEC73A] group-hover:text-[#002556]">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/60 transition-all duration-500 group-hover/link:-rotate-45 group-hover/link:border-[#FEC73A] group-hover/link:bg-[#FEC73A] group-hover/link:text-[#002556]">
               <ArrowDown size={15} strokeWidth={1.5} />
             </span>
           </a>
@@ -219,22 +228,18 @@ export default function Gallery() {
       >
         <div className="gallery-reveal mb-10 flex flex-col gap-6 sm:mb-14 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="eyebrow mb-4 text-[#002556]">
-              A closer look
-            </p>
+            <p className="eyebrow mb-4 text-[#002556]">A closer look</p>
 
             <h2 className="max-w-2xl font-serif text-4xl leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
               Designed with
               <br />
-              <span className="italic text-[#002556]/55">
-                intention.
-              </span>
+              <span className="italic text-[#002556]/55">intention.</span>
             </h2>
           </div>
 
           <p className="max-w-xs text-sm leading-7 text-[#002556]/65">
-            Every project begins with a different brief, a different
-            context and the opportunity to create something meaningful.
+            Every project begins with a different brief, a different context and
+            the opportunity to create something meaningful.
           </p>
         </div>
 
@@ -373,8 +378,8 @@ export default function Gallery() {
             </p>
 
             <p className="max-w-xl font-serif text-2xl leading-snug tracking-[-0.035em] sm:text-3xl">
-              Good architecture is not only what you see. It is what you
-              feel, use and remember.
+              Good architecture is not only what you see. It is what you feel,
+              use and remember.
             </p>
           </div>
 

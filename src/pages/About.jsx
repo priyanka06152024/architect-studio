@@ -229,18 +229,45 @@ export default function About() {
   return (
     <main ref={rootRef} className="overflow-hidden bg-white text-[#002556]">
       {/* INTRO HERO */}
-      <section className="about-intro relative overflow-hidden bg-[#002556] px-5 pb-20 pt-36 text-white sm:px-8 sm:pb-28 sm:pt-44 lg:px-14 lg:pb-32 lg:pt-48">
-        <div className="pointer-events-none absolute -right-20 top-10 h-72 w-72 rounded-full bg-[#FEC73A]/10 blur-3xl sm:h-96 sm:w-96" />
 
+      <section className="about-intro group relative isolate overflow-hidden px-5 pb-20 pt-36 text-white sm:px-8 sm:pb-28 sm:pt-44 lg:px-14 lg:pb-32 lg:pt-48">
+        {/* BACKGROUND ARCHITECTURE IMAGE */}
+        <div className="absolute inset-0 -z-20">
+          <img
+            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=90"
+            alt="Contemporary architectural residence"
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
+
+        {/* SUBTLE DARK OVERLAY */}
+        <div className="absolute inset-0 -z-10 bg-black/35" />
+
+        {/* NAVY BLUE CORNERS ON HOVER — SAME AS HERO */}
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
+          style={{
+            background: `
+        radial-gradient(ellipse at top left, rgba(0,37,86,0.42), transparent 58%),
+        radial-gradient(ellipse at top right, rgba(0,37,86,0.32), transparent 55%),
+        radial-gradient(ellipse at bottom left, rgba(0,37,86,0.42), transparent 60%),
+        radial-gradient(ellipse at bottom right, rgba(0,37,86,0.35), transparent 58%)
+      `,
+          }}
+        />
+
+        {/* CONTENT */}
         <div className="relative mx-auto max-w-[1600px]">
+          {/* SECTION HEADER */}
           <div className="about-reveal mb-16 flex items-center justify-between gap-6 sm:mb-20">
             <Eyebrow light>About Shri Norris Architects</Eyebrow>
 
-            <span className="hidden text-[10px] uppercase tracking-[0.18em] text-white/45 sm:block">
+            <span className="hidden text-[10px] uppercase tracking-[0.18em] text-white/70 sm:block">
               Aligarh, India
             </span>
           </div>
 
+          {/* MAIN HEADING */}
           <h1 className="max-w-[1200px] text-[clamp(3.5rem,10.5vw,10rem)] font-medium leading-[0.86] tracking-[-0.075em]">
             <span className="about-reveal block">Spaces that</span>
 
@@ -249,8 +276,9 @@ export default function About() {
             </span>
           </h1>
 
+          {/* DESCRIPTION AND CTA */}
           <div className="mt-14 grid gap-10 sm:mt-20 sm:grid-cols-2 sm:items-end lg:grid-cols-12">
-            <p className="about-reveal max-w-md text-sm leading-7 text-white/70 sm:text-base sm:leading-8 lg:col-span-5">
+            <p className="about-reveal max-w-md text-sm leading-7 text-white/85 sm:text-base sm:leading-8 lg:col-span-5">
               We design architecture and interiors with a focus on people,
               thoughtful details, and spaces that stand the test of time.
             </p>
@@ -258,22 +286,21 @@ export default function About() {
             <div className="about-reveal flex items-center justify-start sm:justify-end lg:col-span-7">
               <a
                 href="#our-story"
-                className="group inline-flex items-center gap-4 text-[10px] uppercase tracking-[0.18em] text-white transition-colors hover:text-[#FEC73A]"
+                className="group/link inline-flex items-center gap-4 text-[10px] uppercase tracking-[0.18em] text-white transition-colors hover:text-[#FEC73A]"
               >
                 Discover our story
-                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 transition-all duration-500 group-hover:border-[#FEC73A] group-hover:bg-[#FEC73A] group-hover:text-[#002556]">
+                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/60 transition-all duration-500 group-hover/link:border-[#FEC73A] group-hover/link:bg-[#FEC73A] group-hover/link:text-[#002556]">
                   <ArrowDown
                     size={16}
-                    className="transition-transform duration-500 group-hover:translate-y-1"
+                    className="transition-transform duration-500 group-hover/link:translate-y-1"
                   />
                 </span>
               </a>
             </div>
           </div>
 
-          <div className="about-line mt-16 h-px w-full bg-white/25 sm:mt-24" />
-
-          <div className="about-reveal mt-6 flex flex-wrap items-center justify-between gap-4 text-[9px] uppercase tracking-[0.18em] text-white/50 sm:text-[10px]">
+          {/* BOTTOM DETAILS — NO DECORATIVE LINE */}
+          <div className="about-reveal mt-16 flex flex-wrap items-center justify-between gap-4 text-[9px] uppercase tracking-[0.18em] text-white/75 sm:mt-24 sm:text-[10px]">
             <span>Architecture</span>
             <span>Interior Design</span>
             <span>Since 2001</span>
@@ -584,46 +611,7 @@ export default function About() {
         </section>
       )}
 
-      {/* FINAL CTA */}
-      <section className="relative overflow-hidden bg-[#FEC73A] px-5 py-20 text-[#002556] sm:px-8 sm:py-28 lg:px-14 lg:py-36">
-        <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full border border-[#002556]/10 sm:h-96 sm:w-96" />
-
-        <div className="relative mx-auto max-w-[1600px]">
-          <Eyebrow>Have a Project in Mind?</Eyebrow>
-
-          <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-8">
-              <h2 className="about-fade max-w-5xl text-5xl font-medium leading-[0.92] tracking-[-0.07em] sm:text-7xl lg:text-[7.5rem]">
-                Let’s create something{" "}
-                <span className="text-[#002556]/50">meaningful.</span>
-              </h2>
-            </div>
-
-            <div className="about-fade lg:col-span-4 lg:justify-self-end">
-              <Link
-                to="/contact"
-                className="group inline-flex items-center gap-5"
-              >
-                <span className="text-[10px] uppercase tracking-[0.18em]">
-                  Discuss your project
-                </span>
-
-                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#002556] text-white transition-all duration-500 group-hover:rotate-45 group-hover:bg-white group-hover:text-[#002556] sm:h-16 sm:w-16">
-                  <ArrowUpRight size={21} />
-                </span>
-              </Link>
-            </div>
-          </div>
-
-          <div className="about-line mt-14 h-px w-full bg-[#002556]/25 sm:mt-20" />
-
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-4 text-[9px] uppercase tracking-[0.18em] text-[#002556]/60">
-            <span>Shri Norris Architects</span>
-            <span>Architecture · Interior Design</span>
-            <span>Aligarh, India</span>
-          </div>
-        </div>
-      </section>
+     
     </main>
   );
 }

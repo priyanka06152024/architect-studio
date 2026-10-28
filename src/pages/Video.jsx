@@ -1,4 +1,3 @@
-
 import { useLayoutEffect, useRef } from "react";
 import { Play, ArrowUpRight, ArrowDown, MoveUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -134,24 +133,49 @@ export default function Video() {
   }, []);
 
   return (
-    <main
-      ref={pageRef}
-      className="overflow-clip bg-[#FFFFFF] text-[#002556]"
-    >
+    <main ref={pageRef} className="overflow-clip bg-[#FFFFFF] text-[#002556]">
       {/* CINEMATIC HERO */}
-      <section className="flex min-h-[66svh] flex-col justify-between bg-[#002556] px-5 pb-8 pt-28 text-[#FFFFFF] sm:px-8 sm:pb-10 sm:pt-32 lg:min-h-[72svh] lg:px-14 lg:pb-12">
-        <div className="video-hero-eyebrow flex items-center justify-between gap-4">
+
+      <section className="group relative isolate flex min-h-[66svh] flex-col justify-between overflow-hidden px-5 pb-8 pt-28 text-[#FFFFFF] sm:px-8 sm:pb-10 sm:pt-32 lg:min-h-[72svh] lg:px-14 lg:pb-12">
+        {/* BACKGROUND ARCHITECTURE IMAGE */}
+        <div className="absolute inset-0 -z-20">
+          <img
+            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=90"
+            alt="Modern architectural interior"
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
+
+        {/* NATURAL DARK OVERLAY */}
+        <div className="absolute inset-0 -z-10 bg-black/40" />
+
+        {/* SUBTLE BLUE CORNERS ON HOVER */}
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
+          style={{
+            background: `
+        radial-gradient(ellipse at top left, rgba(0,37,86,0.42), transparent 58%),
+        radial-gradient(ellipse at top right, rgba(0,37,86,0.32), transparent 55%),
+        radial-gradient(ellipse at bottom left, rgba(0,37,86,0.42), transparent 60%),
+        radial-gradient(ellipse at bottom right, rgba(0,37,86,0.35), transparent 58%)
+      `,
+          }}
+        />
+
+        {/* TOP HEADER */}
+        <div className="video-hero-eyebrow relative z-10 flex items-center justify-between gap-4">
           <p className="text-[10px] uppercase tracking-[0.24em] text-[#FEC73A] sm:text-xs">
             Shri Norris Architects
           </p>
 
-          <p className="hidden text-[10px] uppercase tracking-[0.2em] text-white/65 sm:block">
+          <p className="hidden text-[10px] uppercase tracking-[0.2em] text-white/80 sm:block">
             Film / Process / Perspective
           </p>
         </div>
 
-        <div className="my-16 lg:my-20">
-          <p className="video-hero-eyebrow mb-6 text-[10px] uppercase tracking-[0.22em] text-white/65 sm:mb-8">
+        {/* MAIN HEADING */}
+        <div className="relative z-10 my-16 lg:my-20">
+          <p className="video-hero-eyebrow mb-6 text-[10px] uppercase tracking-[0.22em] text-white/80 sm:mb-8">
             Watch &amp; explore
           </p>
 
@@ -168,19 +192,19 @@ export default function Video() {
           </h1>
         </div>
 
-        <div className="video-hero-bottom flex flex-col gap-6 border-t border-white/25 pt-6 sm:flex-row sm:items-end sm:justify-between">
-          <p className="max-w-md text-sm leading-7 text-white/75 sm:text-base">
+        {/* BOTTOM DESCRIPTION — NO BORDER LINE */}
+        <div className="video-hero-bottom relative z-10 flex flex-col gap-6 pt-6 sm:flex-row sm:items-end sm:justify-between">
+          <p className="max-w-md text-sm leading-7 text-white/90 sm:text-base">
             Architecture experienced through movement, natural light and the
             details that make a space feel different.
           </p>
 
           <a
             href="#featured-film"
-            className="group inline-flex w-fit items-center gap-3 text-[10px] uppercase tracking-[0.18em] transition-colors duration-300 hover:text-[#FEC73A]"
+            className="group/link inline-flex w-fit items-center gap-3 text-[10px] uppercase tracking-[0.18em] transition-colors duration-300 hover:text-[#FEC73A]"
           >
             Discover the films
-
-            <span className="grid h-10 w-10 place-items-center rounded-full border border-white/35 transition-all duration-500 group-hover:-rotate-45 group-hover:border-[#FEC73A] group-hover:bg-[#FEC73A] group-hover:text-[#002556]">
+            <span className="grid h-10 w-10 place-items-center rounded-full border border-white/60 transition-all duration-500 group-hover/link:-rotate-45 group-hover/link:border-[#FEC73A] group-hover/link:bg-[#FEC73A] group-hover/link:text-[#002556]">
               <ArrowDown size={15} strokeWidth={1.5} />
             </span>
           </a>
@@ -194,9 +218,7 @@ export default function Video() {
       >
         <div className="video-reveal mb-8 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="eyebrow mb-4 text-[#002556]/65">
-              Featured film / 01
-            </p>
+            <p className="eyebrow mb-4 text-[#002556]/65">Featured film / 01</p>
 
             <h2 className="font-serif text-4xl leading-none tracking-[-0.055em] sm:text-6xl lg:text-7xl">
               Space in
@@ -338,9 +360,7 @@ export default function Video() {
       <section className="container-shell py-20 sm:py-24 lg:py-28">
         <div className="video-reveal flex flex-col gap-8 border-t border-[#002556]/20 pt-7 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="eyebrow mb-4 text-[#002556]/65">
-              Stay connected
-            </p>
+            <p className="eyebrow mb-4 text-[#002556]/65">Stay connected</p>
 
             <h2 className="max-w-xl font-serif text-4xl leading-[0.98] tracking-[-0.055em] sm:text-6xl">
               More to see.
