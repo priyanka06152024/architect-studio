@@ -405,7 +405,7 @@ export function Footer() {
               {/* Logo container */}
               <span className="relative h-[85px] w-[85px] shrink-0 overflow-hidden rounded-full bg-white ring-2 ring-white/10 transition-all duration-500 ease-out group-hover:rotate-[-8deg] group-hover:scale-105 group-hover:ring-[#FEC73A] sm:h-[76px] sm:w-[76px]">
                 <img
-                  src="/src/assets/images/Shri Norris Architects Logo 1.webp"
+                  src={logo}
                   alt="Shri Norris Architects"
                   className="h-full w-full scale-[1.5] rounded-full object-contain  transition-transform duration-700 ease-out group-hover:scale-110"
                 />
