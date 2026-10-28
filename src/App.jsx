@@ -13,7 +13,7 @@ import Testimonials from "./pages/Testimonials";
 import Team from "./pages/Team";
 import Certificates from "./pages/Certificates";
 
-import Preloader from "./components/Preloader";
+
 import ScrollAnimations from "./components/ScrollAnimations";
 import ServiceDetails from "./pages/ServiceDetails";
 
@@ -38,10 +38,7 @@ export default function App() {
     <BrowserRouter>
       <ScrollToTop />
 
-      {loading && (
-        <Preloader onComplete={() => setLoading(false)} />
-      )}
-
+     
       <ScrollAnimations />
 
       <Routes>
