@@ -101,7 +101,7 @@ export default function OwnerContact() {
           <div className="owner-reveal relative mx-auto w-full max-w-[390px] md:mx-0">
             <div className="owner-photo relative aspect-[4/4.5] overflow-hidden bg-[#E8E3D8]">
               <img
-                src="/images/owner.jpg"
+                src="/images/owner.webp"
                 alt="Sudhir Kumar, owner of Shri Norris Architects"
                 className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-[1.04]"
                 loading="lazy"

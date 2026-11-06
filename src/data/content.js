@@ -12,6 +12,9 @@ import pumbling from "../assets/images/pumbling.avif";
 import service from "../assets/images/service.jpg";
 import serviceLS from "../assets/images/serviceLS.avif";
 import img3d from "../assets/images/3dand2d.avif";
+import Navneet from "../assets/images/Navneet.webp";
+import Sanjeev from "../assets/images/Sanjeev.webp";
+import sejal from "../assets/images/sejal.webp";
 
 
 
@@ -178,29 +181,24 @@ export const testimonials = [
 
 
 export const teamMembers = [
+
 {
-name: "Sudhir Kumar",
-role: "Founder & Principal Architect",
-image: "/images/team/sudhir-kumar.webp",
-number: "01",
-},
-{
-name: "Team Member Two",
+name: "Mr. Navneet",
 role: "Senior Architect",
-image: "/images/team/architect-two.webp",
-number: "02",
+image: Navneet,
+
 },
 {
-name: "Team Member Three",
+name: "Mr. Sanjeev",
 role: "Interior Designer",
-image: "/images/team/designer.webp",
-number: "03",
+image: Sanjeev,
+
 },
 {
-name: "Team Member Four",
+name: "Ms. Sejal",
 role: "Design & Planning",
-image: "/images/team/designer-two.webp",
-number: "04",
+image: sejal,
+
 },
 ];
 

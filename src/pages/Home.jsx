@@ -27,6 +27,7 @@ import img2 from "../assets/images/img2.avif";
 import img3 from "../assets/images/img3.avif";
 import img4 from "../assets/images/img4.avif";
 import img5 from "../assets/images/img5.avif";
+import owner from "../assets/images/owner.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1216,7 +1217,7 @@ export default function Home() {
             {/* Left: Owner portrait */}
             <div className="image-reveal group relative min-h-[430px] overflow-hidden bg-[#E7E2D8] sm:min-h-[540px] lg:min-h-[650px]">
               <img
-                src="/images/owner.jpg"
+                src={owner}
                 alt="Sudhir Kumar — Shri Norris Architects"
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-[1.035]"
