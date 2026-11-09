@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { projects, services, testimonials } from "../data/content";
 
-import aboutImg from "../assets/images/aboutimg.avif";
+import aboutImg from "../assets/images/aboutimg.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 

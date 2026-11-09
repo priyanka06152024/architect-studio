@@ -1,20 +1,20 @@
-import project1 from "../assets/images/project1.avif";
-import project2 from "../assets/images/project2.avif";
-import project3 from "../assets/images/project3.avif";
-import project4 from "../assets/images/project4.avif";
-import project5 from "../assets/images/project5.avif";
-import project6 from "../assets/images/project6.avif";
+import project1 from "../assets/images/project1.webp";
+import project2 from "../assets/images/project2.webp";
+import project3 from "../assets/images/project3.webp";
+import project4 from "../assets/images/project4.webp";
+import project5 from "../assets/images/project5.webp";
+import project6 from "../assets/images/project6.webp";
 
-import electric from "../assets/images/electric.avif";
-import construction from "../assets/images/construction.avif";
-import constructionDrawing from "../assets/images/constructionDrawing.avif";
-import pumbling from "../assets/images/pumbling.avif";
+import electric from "../assets/images/electric.webp";
+import construction from "../assets/images/construction.webp";
+import constructionDrawing from "../assets/images/constructionDrawing.webp";
+import pumbling from "../assets/images/pumbling.webp";
 import service from "../assets/images/service.jpg";
-import serviceLS from "../assets/images/serviceLS.avif";
-import img3d from "../assets/images/3dand2d.avif";
+import serviceLS from "../assets/images/serviceLS.webp";
+import img3d from "../assets/images/3dand2d.webp";
 import Navneet from "../assets/images/Navneet.webp";
-import Sanjeev from "../assets/images/Sanjeev.webp";
-import sejal from "../assets/images/sejal.webp";
+import Sanjeev from "../assets/images/Sanjeev.png";
+import sejal from "../assets/images/sejal.png";
 
 
 

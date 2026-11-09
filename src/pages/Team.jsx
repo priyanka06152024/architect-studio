@@ -3,7 +3,8 @@ import { ArrowDown, ArrowUpRight, MoveUpRight } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CTASection } from "../components/Shared";
-import founderimg from "../assets/images/founderimg.avif";
+import { teamMembers } from "../data/content";
+import owner from "../assets/images/owner.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,29 +12,7 @@ export default function Team() {
   const pageRef = useRef(null);
   const [activeMember, setActiveMember] = useState(null);
 
-  const teamMembers = [
-    {
-      number: "01",
-      name: "Sudhir Kumar",
-      role: "Founder & Principal Architect",
-      image: founderimg,
-    },
-    {
-      number: "02",
-      name: "Architecture Team",
-      role: "Planning & Design",
-      image:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80",
-    },
-    {
-      number: "03",
-      name: "Project Team",
-      role: "Project Coordination",
-      image:
-        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80",
-    },
-  ];
-
+  
   useLayoutEffect(() => {
     const page = pageRef.current;
 
@@ -229,7 +208,7 @@ export default function Team() {
             <div className="group relative overflow-hidden bg-[#002556]/10">
               <div className="aspect-[4/5] overflow-hidden">
                 <img
-                  src={founderimg}
+                  src={owner}
                   alt="Portrait of Sudhir Kumar"
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.045]"

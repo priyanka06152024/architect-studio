@@ -1,11 +1,15 @@
 
-import electric from "../assets/images/electric.avif";
-import construction from "../assets/images/construction.avif";
-import constructionDrawing from "../assets/images/constructionDrawing.avif";
-import pumbling from "../assets/images/pumbling.avif";
+import electric from "../assets/images/electric.webp";
+import construction from "../assets/images/construction.webp";
+import constructionDrawing from "../assets/images/constructionDrawing.webp";
+import pumbling from "../assets/images/pumbling.webp";
 import service from "../assets/images/service.jpg";
-import serviceLS from "../assets/images/serviceLS.avif";
-import img3D from "../assets/images/3dand2d.avif";
+import serviceLS from "../assets/images/serviceLS.webp";
+import img3D from "../assets/images/3dand2d.webp";
+import videoimg from "../assets/images/videoimg.webp";
+import project5 from "../assets/images/project5.webp";
+import img4 from "../assets/images/img4.webp";
+import img5 from "../assets/images/img5.webp";
 
 export const serviceDetails = {
   "architecture-planning": {
@@ -14,7 +18,7 @@ export const serviceDetails = {
     overview:
       "Every successful building begins with a clear understanding of the people who will use it. Our architecture and planning service brings together your vision, site conditions, functional requirements and long-term goals to create spaces that feel considered from the very beginning. We explore layouts, circulation, natural light, proportions and the relationship between indoor and outdoor areas. From the first design conversation to the development of architectural concepts, every decision is made to support a practical, cohesive and distinctive result.",
     image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=90",
+      videoimg,
     features: [
       "Residential architecture and house planning",
       "Commercial building concepts and layouts",
@@ -86,8 +90,7 @@ export const serviceDetails = {
     heading: "Bring architecture closer to nature.",
     overview:
       "Outdoor spaces deserve the same thought and attention as the interiors of a building. Our landscape design approach considers gardens, pathways, planting, outdoor seating and the transition between built and natural environments. We look at the character of the site, available sunlight, movement patterns, maintenance requirements and the atmosphere you want to create. Whether it is a welcoming residential garden, a carefully planned courtyard or a landscaped commercial entrance, the goal is to create an outdoor setting that complements the architecture and feels inviting throughout everyday use.",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56c5a?auto=format&fit=crop&w=2000&q=90",
+    image: project5,
     features: [
       "Residential garden and courtyard concepts",
       "Outdoor seating and relaxation areas",
@@ -160,7 +163,7 @@ export const serviceDetails = {
     overview:
       "The front elevation gives a building much of its visual identity. It brings together proportions, openings, balconies, materials, colour and architectural details to shape the way the property is experienced from the outside. Our elevation design service explores how these elements can work together to create a distinctive facade without losing sight of the building's practical requirements. Whether your preference is contemporary, understated or more traditional, we aim for a coherent exterior that relates naturally to the overall architectural plan.",
     image:
-      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=2000&q=90",
+      img4,
     features: [
       "Modern and contemporary elevation concepts",
       "Residential house front elevation design",
@@ -233,7 +236,7 @@ export const serviceDetails = {
     overview:
       "A property feels more complete when its interior and exterior are designed as parts of the same story. Our integrated design service considers the facade, entrance, interior spaces, material palette, colours and lighting together rather than treating each element in isolation. This helps create a more consistent transition from the street to the interior, with design choices that complement one another. The approach can be tailored to new homes, renovations and commercial properties where a connected visual identity is important.",
     image:
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2000&q=90",
+      img5,
     features: [
       "Integrated interior and exterior concepts",
       "Facade and entrance design coordination",

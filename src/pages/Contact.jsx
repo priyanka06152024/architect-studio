@@ -11,6 +11,7 @@ import {
   MoveUpRight,
 } from "lucide-react";
 import { gsap } from "gsap";
+import nooris from "../assets/images/norris.webp";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { handleWhatsAppEnquiry } from "../components/Shared.jsx";
 
@@ -456,6 +457,61 @@ export default function Contact() {
                 </p>
               )}
             </form>
+          </div>
+        </div>
+      </section>
+
+      {/* ARCHITECTURAL IMAGE SECTION */}
+      <section className="relative h-[65svh] min-h-[430px] overflow-hidden bg-[#002556] sm:h-[75svh] lg:h-[85svh]">
+        <img
+          src= {nooris}
+          alt="Contemporary architectural space"
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-[2000ms] hover:scale-105"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-r from-[#002556]/75 via-[#002556]/25 to-transparent" />
+      </section>
+
+      {/* FIND OUR STUDIO / MAP SECTION */}
+      <section className="bg-[#F8F7F3] px-5 py-20 sm:px-8 sm:py-28 lg:px-14 lg:py-32">
+        <div className="mx-auto max-w-[1600px]">
+          {/* HEADING */}
+          <div className="mb-12 flex flex-col justify-between gap-8 lg:mb-16 lg:flex-row lg:items-end">
+            <div>
+              <p className="mb-5 text-[10px] uppercase tracking-[0.22em] text-[#b38600] sm:text-xs">
+                03 — Come visit us
+              </p>
+
+              <h2 className="font-serif text-5xl leading-[0.95] tracking-[-0.055em] text-[#002556] sm:text-7xl lg:text-8xl">
+                Find your way
+                <br />
+                <span className="italic text-[#002556]/50">to our studio.</span>
+              </h2>
+            </div>
+
+            <p className="max-w-sm text-sm leading-7 text-[#002556]/60 sm:text-base">
+              We would love to welcome you to our studio. Visit us to discuss
+              your ideas, explore possibilities and plan your next project with
+              our team.
+            </p>
+          </div>
+
+          {/* MAP CONTAINER */}
+          <div className="relative overflow-hidden border border-[#002556]/10 bg-white p-2 sm:p-3">
+            <div className="relative h-[350px] overflow-hidden sm:h-[480px] lg:h-[620px]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28208.433761931698!2d78.06589054150837!3d27.900309396224173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3974a5854ca71b09%3A0x2a23b9b7606e0efe!2sNorris%20Architects!5e0!3m2!1sen!2sin!4v1794196914168!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                title="Norris Architects Location"
+                className="absolute inset-0"
+              />
+            </div>
           </div>
         </div>
       </section>

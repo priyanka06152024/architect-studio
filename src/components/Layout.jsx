@@ -1,6 +1,5 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { NavLink, Link, Outlet } from "react-router-dom";
-import WebsiteCounter from "../components/WebsiteCounter";
 import VisitorCounter from "../components/VisitorCounter";
 import {
   ArrowUpRight,
@@ -15,12 +14,12 @@ import {
   Plus,
   ArrowRight,
   ArrowDownRight,
-  Mail
+  Mail,
 } from "lucide-react";
 import { FaInstagram } from "react-icons/fa";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import logo from "../assets/images/Shri Norris Architects Logo 1.webp";
+import logo from "../assets/images/logo.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -177,11 +176,14 @@ export function Header() {
           className="header-brand group flex shrink-0 items-center gap-3"
           onClick={() => setOpen(false)}
         >
-          <span className="relative grid h-20 w-22 shrink-0 place-items-center overflow-hidden">
+          <span className="relative grid h-20 w-22 shrink-0 place-items-center">
             <img
               src={logo}
               alt="Shri Norris Architects Logo"
-              className="h-full w-full scale-[1.8] object-contain transition-transform duration-500 group-hover:scale-[1.7]"
+              width="132"
+              height="132"
+              decoding="async"
+              className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
             />
           </span>
         </Link>
@@ -311,36 +313,48 @@ export function Footer() {
   const footerRef = useRef(null);
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".footer-reveal", {
-        y: 35,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.13,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 82%",
-          once: true,
-        },
-      });
+    const footer = footerRef.current;
 
-      gsap.from(".footer-bottom", {
-        opacity: 0,
-        y: 12,
-        duration: 0.7,
-        delay: 0.2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "bottom bottom",
-          once: true,
-        },
-      });
-    }, footerRef);
+    if (!footer) return;
+
+    const ctx = gsap.context(() => {
+      const revealElements = footer.querySelectorAll(".footer-reveal");
+      const bottomElement = footer.querySelector(".footer-bottom");
+
+      if (revealElements.length > 0) {
+        gsap.from(revealElements, {
+          y: 35,
+          opacity: 0,
+          duration: 0.9,
+          stagger: 0.13,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: footer,
+            start: "top 82%",
+            once: true,
+          },
+        });
+      }
+
+      if (bottomElement) {
+        gsap.from(bottomElement, {
+          opacity: 0,
+          y: 12,
+          duration: 0.7,
+          delay: 0.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: bottomElement,
+            start: "top 95%",
+            once: true,
+          },
+        });
+      }
+    }, footer);
 
     return () => ctx.revert();
   }, []);
+
   const phoneNumber = "919876543210";
   const whatsappNumber = "919876543210";
 
@@ -362,7 +376,7 @@ export function Footer() {
 
       {/* Top CTA */}
       <div className="relative border-b border-white/20 px-5 py-16 sm:px-8 sm:py-20 lg:px-[5vw] lg:py-28">
-        <div className="mx-auto flex max-w-[1600px] flex-col justify-between gap-10 md:flex-row md:items-end">
+        <div className="footer-reveal mx-auto flex max-w-[1600px] flex-col justify-between gap-10 md:flex-row md:items-end">
           <div className="max-w-4xl">
             <p className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#FEC73A]">
               <span className="h-2 w-2 rounded-full bg-[#FEC73A]" />
@@ -389,7 +403,7 @@ export function Footer() {
       </div>
 
       {/* Main footer content */}
-      <div className="relative mx-auto grid max-w-[1600px] grid-cols-1 gap-12 px-5 py-14 sm:px-8 md:grid-cols-2 lg:grid-cols-12 lg:gap-10 lg:px-[5vw] lg:py-20">
+      <div className="footer-reveal relative mx-auto grid max-w-[1600px] grid-cols-1 gap-12 px-5 py-14 sm:px-8 md:grid-cols-2 lg:grid-cols-12 lg:gap-10 lg:px-[5vw] lg:py-20">
         {/* Brand */}
         <div className="lg:col-span-4">
           <Link
@@ -407,7 +421,7 @@ export function Footer() {
                 <img
                   src={logo}
                   alt="Shri Norris Architects"
-                  className="h-full w-full scale-[1.5] rounded-full object-contain  transition-transform duration-700 ease-out group-hover:scale-110"
+                  className="h-full w-full  rounded-full object-contain  transition-transform duration-700 ease-out group-hover:scale-110"
                 />
               </span>
             </span>
@@ -430,7 +444,6 @@ export function Footer() {
             <VisitorCounter />
           </div>
         </div>
-
         {/* Pages */}
         <div className="lg:col-span-3">
           <p className="mb-6 text-xs font-semibold uppercase tracking-[0.22em] text-[#FEC73A]">
@@ -456,7 +469,6 @@ export function Footer() {
             ))}
           </nav>
         </div>
-
         {/* Contact */}
         <div className="lg:col-span-3">
           <p className="mb-6 text-xs font-semibold uppercase tracking-[0.22em] text-[#FEC73A]">
@@ -487,17 +499,12 @@ export function Footer() {
               rel="noreferrer"
               className="group flex items-start gap-3 text-sm text-white/75 transition-colors hover:text-[#FEC73A]"
             >
-              <Mail
-                size={17}
-                className="mt-0.5 shrink-0 text-[#FEC73A]"
-              />
+              <Mail size={17} className="mt-0.5 shrink-0 text-[#FEC73A]" />
               <span>
                 Mail
                 <span className="mt-1 block text-xs text-white/45">
-                  Norrisarchitects0@gmail.com,
-                  Info@shrinorrisarchitects.co.in,
+                  Norrisarchitects0@gmail.com, Info@shrinorrisarchitects.co.in,
                   sudheerkumaraligarh@gamil.com
-
                 </span>
               </span>
               <ArrowUpRight
@@ -521,7 +528,6 @@ export function Footer() {
             </a>
           </div>
         </div>
-
         {/* Availability / note */}
         <div className="lg:col-span-2">
           <p className="mb-6 text-xs font-semibold uppercase tracking-[0.22em] text-[#FEC73A]">
@@ -547,7 +553,7 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="relative border-t border-white/15 px-5 sm:px-8 lg:px-[5vw]">
+      <div className="footer-bottom relative border-t border-white/15 px-5 sm:px-8 lg:px-[5vw]">
         <div className="mx-auto flex max-w-[1600px] flex-col gap-4 py-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} Shri Norris Architects. All rights

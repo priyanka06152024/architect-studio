@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CTASection } from "../components/Shared";
-import videoimg from "../assets/images/videoimg.avif";
+import videoimg from "../assets/images/videoimg.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 

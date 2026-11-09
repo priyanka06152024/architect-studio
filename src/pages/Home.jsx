@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 import { Lightbulb, Ruler, PencilRuler, HardHat } from "lucide-react";
-
+import project1 from "../assets/images/project1.webp";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -22,11 +22,11 @@ import OwnerContact from "../data/OwnerContact";
 import { projects, services, testimonials } from "../data/content";
 import { teamMembers } from "../data/content";
 import { CTASection } from "../components/Shared";
-import img1 from "../assets/images/img1.avif";
-import img2 from "../assets/images/img2.avif";
-import img3 from "../assets/images/img3.avif";
-import img4 from "../assets/images/img4.avif";
-import img5 from "../assets/images/img5.avif";
+import img1 from "../assets/images/img1.webp";
+import img2 from "../assets/images/img2.webp";
+import img3 from "../assets/images/img3.webp";
+import img4 from "../assets/images/img4.webp";
+import img5 from "../assets/images/img5.webp";
 import owner from "../assets/images/owner.webp";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -478,7 +478,6 @@ export default function Home() {
 
   const active = teamMembers[activeMember];
 
-
   return (
     <main
       ref={rootRef}
@@ -490,47 +489,39 @@ export default function Home() {
         className="group relative h-[calc(100svh-80px)] min-h-[600px] w-full overflow-hidden text-white"
       >
         {/* BACKGROUND SLIDER IMAGES */}
-        {heroSlides.map((slide, index) => (
-          <div
-            key={slide.image}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-              index === activeSlide ? "z-10 opacity-100" : "z-0 opacity-0"
-            }`}
-            aria-hidden={index !== activeSlide}
-          >
-            {/* ORIGINAL IMAGE */}
-            <img
-              src={slide.image}
-              alt={slide.alt}
-              className={`absolute inset-0 h-full w-full object-cover transition-transform duration-[7000ms] ease-out ${
-                index === activeSlide ? "scale-100" : "scale-110"
-              }`}
-            />
+        {heroSlides.map((slide, index) =>
+          index === activeSlide ? (
+            <div key={slide.image} className="hero-photo absolute inset-0 z-10">
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                width="1920"
+                height="1080"
+                loading="eager"
+                fetchPriority={activeSlide === 0 ? "high" : "auto"}
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
 
-            {/* VERY LIGHT IMAGE DARKENING */}
-            <div className="absolute inset-0 bg-black/5" />
+              <div className="absolute inset-0 bg-black/5" />
 
-            {/* SOFT BLUE ONLY AT THE CORNERS ON HOVER */}
+              <div
+                className="absolute inset-0 opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
+                style={{
+                  background: `
+            radial-gradient(ellipse at top left, rgba(0,37,86,0.42), transparent 58%),
+            radial-gradient(ellipse at top right, rgba(0,37,86,0.32), transparent 55%),
+            radial-gradient(ellipse at bottom left, rgba(0,37,86,0.42), transparent 60%),
+            radial-gradient(ellipse at bottom right, rgba(0,37,86,0.35), transparent 58%)
+          `,
+                }}
+              />
 
-            {/* SOFT NAVY BLUE CORNERS ON HOVER */}
-            <div
-              className="absolute inset-0 opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
-              style={{
-                background: `
-      radial-gradient(ellipse at top left, rgba(0,37,86,0.42), transparent 58%),
-      radial-gradient(ellipse at top right, rgba(0,37,86,0.32), transparent 55%),
-      radial-gradient(ellipse at bottom left, rgba(0,37,86,0.42), transparent 60%),
-      radial-gradient(ellipse at bottom right, rgba(0,37,86,0.35), transparent 58%)
-    `,
-              }}
-            />
-
-            {/* TEXT READABILITY — NO BLUE TINT */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent" />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-          </div>
-        ))}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+            </div>
+          ) : null,
+        )}
 
         {/* TOP HEADER */}
         <div className="absolute left-0 right-0 top-0 z-20 flex items-center justify-between px-6 pt-8 sm:px-12 sm:pt-10 lg:px-20">
@@ -732,7 +723,7 @@ export default function Home() {
           <div className="relative lg:pt-8">
             <div className="group relative aspect-[4/4.5] overflow-hidden sm:aspect-[4/3.7] lg:aspect-[4/5.2]">
               <img
-                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=90"
+                src={project1}
                 alt="Contemporary architectural residence with natural materials"
                 className="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
               />
@@ -1005,7 +996,7 @@ export default function Home() {
         {/* Process image */}
         <div className="reveal relative mt-14 h-[300px] overflow-hidden sm:mt-20 sm:h-[420px] lg:h-[500px]">
           <img
-            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2200&q=90"
+            src={project1}
             alt="Contemporary architecture with carefully considered materials and spaces"
             loading="lazy"
             className="h-full w-full object-cover object-center transition-transform duration-1000 hover:scale-[1.03]"
@@ -1613,14 +1604,6 @@ export default function Home() {
                   >
                     {/* Name and role */}
                     <div className="flex min-w-0 flex-1 items-center gap-3 sm:gap-6">
-                      <span
-                        className={`shrink-0 text-[10px] tracking-widest transition-colors duration-300 ${
-                          isActive ? "text-[#C6A45B]" : "text-[#002556]/35"
-                        }`}
-                      >
-                        {member.number}
-                      </span>
-
                       <div className="min-w-0">
                         <h3
                           className={`font-serif text-xl tracking-[-0.045em] transition-all duration-300 sm:text-3xl lg:text-5xl ${
